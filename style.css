@@ -1,0 +1,172 @@
+body {
+    font-family: 'Fira Code', monospace;
+    background: #0d1117;
+    color: #c9d1d9;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: left;
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.terminal {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 80vh;
+    overflow-y: auto;
+    transition: background 0.3s, color 0.3s;
+}
+
+.light-mode .terminal {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.prompt { 
+    color: #58a6ff; 
+}
+
+a { 
+    color: #58a6ff; 
+    text-decoration: none; 
+}
+
+a:hover { 
+    text-decoration: underline; 
+}
+
+.expandable { 
+    cursor: pointer; 
+    color: #58a6ff; 
+}
+
+.details { 
+    display: none; 
+    margin-left: 20px; 
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.button {
+    background: #161b22;
+    color: #c9d1d9;
+    border: 2px solid #58a6ff;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background: #58a6ff;
+    color: #0d1117;
+}
+
+.light-mode .button {
+    background: #f5f5f5;
+    color: #333;
+    border: 2px solid #007bff;
+}
+
+.light-mode .button:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background: #161b22;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px solid #58a6ff;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+
+.toggle-switch div {
+    width: 18px;
+    height: 18px;
+    background: #58a6ff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.light-mode .toggle-switch {
+    background: #f5f5f5;
+    border-color: #007bff;
+}
+
+.light-mode .toggle-switch div {
+    transform: translateX(24px);
+    background: #007bff;
+}
+
+.toggle {
+    cursor: pointer;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+}
+
+#input-wrapper {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    margin-left: 8px;
+}
+
+.input-field {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100px;
+}
+
+#input-text {
+    min-width: 0;
+    display: inline-block;
+    white-space: pre;
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background-color: #58a6ff;
+    animation: blink 1s infinite;
+    margin-left: 0;
+    position: relative;
+    left: 0;
+}
+
+@keyframes blink {
+    50% { 
+        opacity: 0; 
+    }
+}

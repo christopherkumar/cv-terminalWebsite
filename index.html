@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="commands.js"></script>
+    <script src="terminal.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christopher Kumar - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onclick="maintainFocus()">
+    <div class="controls">
+        <div class="toggle-switch" onclick="toggleMode()">
+            <div></div>
+        </div>
+        <button class="button" onclick="resetTerminal()">Reset</button>
+    </div>
+    <div class="container terminal">
+        <p><span class="prompt">➜ ~ </span>whoami</p>
+        <p>Christopher Kumar</p>
+        <p>Computer Systems Engineering (Honours) Graduate</p>
+        <p><span class="prompt">➜ ~ </span>Available commands: skills, experience, projects, contact</p>
+        <div id="terminal-output"></div>
+        <div class="input-line">
+            <span class="prompt">➜ ~ </span>
+            <span id="input-wrapper">
+                <span id="input-text">&nbsp;</span><span class="blinking-cursor"></span>
+            </span>
+            <input type="text" class="input-field" id="terminal-input" autofocus>
+        </div>            
+    </div>
+</body>
+</html>
