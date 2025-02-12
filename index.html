@@ -11,17 +11,9 @@
         <div class="toggle-switch" onclick="toggleMode()">
             <div></div>
         </div>
-        <button class="button" onclick="resetTerminal()">Reset</button>
     </div>
     <div class="container terminal">
-        <p><span class="prompt">➜ ~ </span>whoami</p>
-        <p>Christopher Kumar</p>
-        <ul>
-            <li>Bachelor of Engineer (Honours) - Computer Systems</li>
-            <li>Foundation Science</li>
-        </ul>
-        <p><span class="prompt">➜ ~ </span>Available commands: skills, experience, projects, contact</p>
-        <div id="terminal-output"></div>
+        <div id="terminal-output"></div> <!-- Text will be typed here dynamically -->
         <div class="input-line">
             <span class="prompt">➜ ~ </span>
             <span id="input-wrapper">
@@ -30,6 +22,7 @@
             <input type="text" class="input-field" id="terminal-input" autofocus>
         </div>            
     </div>
+
     <script src="commands.js"></script>
     <script src="script.js"></script>
 </body>
