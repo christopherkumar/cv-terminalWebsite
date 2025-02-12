@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
-    <script src="commands.js"></script>
-    <script src="terminal.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christopher Kumar - Resume</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body onclick="maintainFocus()">
     <div class="controls">
@@ -20,7 +16,10 @@
     <div class="container terminal">
         <p><span class="prompt">➜ ~ </span>whoami</p>
         <p>Christopher Kumar</p>
-        <p>Computer Systems Engineering (Honours) Graduate</p>
+        <ul>
+            <li>Bachelor of Engineer (Honours) - Computer Systems</li>
+            <li>Foundation Science</li>
+        </ul>
         <p><span class="prompt">➜ ~ </span>Available commands: skills, experience, projects, contact</p>
         <div id="terminal-output"></div>
         <div class="input-line">
@@ -31,5 +30,7 @@
             <input type="text" class="input-field" id="terminal-input" autofocus>
         </div>            
     </div>
+    <script src="commands.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

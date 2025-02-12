@@ -1,35 +1,80 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+/* General Styles */
 body {
-    font-family: 'Fira Code', monospace;
+    align-items: center;
     background: #0d1117;
     color: #c9d1d9;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    font-family: 'Fira Code', monospace;
     height: 100vh;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
     text-align: left;
     transition: background 0.3s, color 0.3s;
 }
 
 .container {
-    width: 80%;
+    border-radius: 10px;
     max-width: 800px;
     padding: 20px;
-    border-radius: 10px;
+    width: 80%;
 }
 
+/* Terminal Styles */
 .terminal {
     background: #161b22;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    width: 100%;
     height: 80vh;
     overflow-y: auto;
+    padding: 20px;
     transition: background 0.3s, color 0.3s;
+    width: 100%;
+}
+
+/* Input Handling */
+.input-field {
+    caret-color: transparent;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+}
+
+.input-line {
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+/* Cursor Animation */
+.blinking-cursor {
+    animation: blink 1s infinite;
+    background-color: #58a6ff;
+    display: inline-block;
+    height: 16px;
+    left: 0;
+    margin-left: 0;
+    position: relative;
+    width: 4px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Light Mode Styles */
+.light-mode {
+    background: #dcdcdc;
+    color: #333;
 }
 
 .light-mode .terminal {
@@ -37,43 +82,55 @@ body {
     color: #333;
 }
 
-.prompt { 
-    color: #58a6ff; 
+.light-mode .prompt {
+    color: #007bff;
 }
 
-a { 
-    color: #58a6ff; 
-    text-decoration: none; 
+.light-mode a {
+    color: #007bff;
 }
 
-a:hover { 
-    text-decoration: underline; 
+.light-mode a:hover {
+    color: #0056b3;
 }
 
-.expandable { 
-    cursor: pointer; 
-    color: #58a6ff; 
+/* Links */
+a {
+    color: #58a6ff;
+    text-decoration: none;
 }
 
-.details { 
-    display: none; 
-    margin-left: 20px; 
+a:hover {
+    text-decoration: underline;
 }
 
+/* Expandable Sections */
+.expandable {
+    color: #58a6ff;
+    cursor: pointer;
+}
+
+.details {
+    display: none;
+    margin-left: 20px;
+}
+
+/* Controls */
 .controls {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
 }
 
+/* Buttons */
 .button {
     background: #161b22;
-    color: #c9d1d9;
     border: 2px solid #58a6ff;
-    padding: 10px 15px;
-    cursor: pointer;
     border-radius: 5px;
+    color: #c9d1d9;
+    cursor: pointer;
     font-size: 14px;
+    padding: 10px 15px;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -84,8 +141,8 @@ a:hover {
 
 .light-mode .button {
     background: #f5f5f5;
-    color: #333;
     border: 2px solid #007bff;
+    color: #333;
 }
 
 .light-mode .button:hover {
@@ -93,25 +150,26 @@ a:hover {
     color: #fff;
 }
 
+/* Toggle Switch */
 .toggle-switch {
-    position: relative;
-    width: 50px;
-    height: 25px;
+    align-items: center;
     background: #161b22;
+    border: 2px solid #58a6ff;
     border-radius: 15px;
     cursor: pointer;
-    border: 2px solid #58a6ff;
     display: flex;
-    align-items: center;
+    height: 25px;
     padding: 3px;
+    position: relative;
+    width: 50px;
 }
 
 .toggle-switch div {
-    width: 18px;
-    height: 18px;
     background: #58a6ff;
     border-radius: 50%;
+    height: 18px;
     transition: transform 0.3s ease;
+    width: 18px;
 }
 
 .light-mode .toggle-switch {
@@ -120,53 +178,20 @@ a:hover {
 }
 
 .light-mode .toggle-switch div {
-    transform: translateX(24px);
     background: #007bff;
+    transform: translateX(24px);
 }
 
+/* Toggle Button */
 .toggle {
     cursor: pointer;
 }
 
-.input-line {
-    display: flex;
-    align-items: center;
+.toggle:hover {
+    color: #89b4fa;
 }
 
-#input-wrapper {
-    display: inline-flex;
-    align-items: center;
-    min-width: 0;
-    margin-left: 8px;
-}
-
-.input-field {
-    position: absolute;
-    opacity: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100px;
-}
-
-#input-text {
-    min-width: 0;
-    display: inline-block;
-    white-space: pre;
-}
-
-.blinking-cursor {
-    display: inline-block;
-    width: 4px;
-    height: 16px;
-    background-color: #58a6ff;
-    animation: blink 1s infinite;
-    margin-left: 0;
-    position: relative;
-    left: 0;
-}
-
-@keyframes blink {
-    50% { 
-        opacity: 0; 
-    }
+/* Prompt */
+.prompt {
+    color: #58a6ff;
 }
