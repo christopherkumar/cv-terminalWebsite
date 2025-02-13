@@ -3,15 +3,15 @@ const inputText = document.getElementById("input-text");
 const outputDiv = document.getElementById("terminal-output");
 
 function maintainFocus() {
-    setTimeout(() => inputField.focus(), 50); // Small delay helps on some mobile browsers
+    inputField.focus();
 }
 
 inputText.textContent = '';
 maintainFocus();
 
 inputField.addEventListener("input", function () {
-    inputText.textContent = inputField.value;
-    maintainFocus();  // Ensure focus is maintained
+    const value = inputField.value;
+    inputText.textContent = value;
 });
 
 // inputField.addEventListener("keydown", function (event) {
