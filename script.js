@@ -9,22 +9,16 @@ function maintainFocus() {
 inputText.textContent = '';
 maintainFocus();
 
-inputField.addEventListener("input", function (event) {
-    // Get the current value of the input field
-    const value = inputField.value;
+inputField.addEventListener("input", function () {
+    // Directly mirror input value to the display element
+    inputText.textContent = inputField.value || "\u00A0"; 
 
-    // Check if the backspace key was pressed
-    if (event.inputType === "deleteContentBackward") {
-        inputText.textContent = value; // Reflect deletion
-    } else {
-        inputText.textContent = value; // Update text normally
-    }
-
-    // Ensure the cursor stays at the end of input
+    // Keep cursor at the end of input
     setTimeout(() => {
-        inputField.selectionStart = inputField.selectionEnd = value.length;
+        inputField.selectionStart = inputField.selectionEnd = inputField.value.length;
     }, 0);
 });
+
 
 // inputField.addEventListener("keydown", function (event) {
 //     if (event.key === "Enter") {
