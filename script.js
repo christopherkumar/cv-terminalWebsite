@@ -3,7 +3,7 @@ const inputText = document.getElementById("input-text");
 const outputDiv = document.getElementById("terminal-output");
 
 function maintainFocus() {
-    inputField.focus();
+    setTimeout(() => inputField.focus(), 50); // Small delay helps on some mobile browsers
 }
 
 inputText.textContent = '';
