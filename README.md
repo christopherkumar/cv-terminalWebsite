@@ -1,2 +1,2 @@
 # cv-website
-https://lucent-heliotrope-fc7975.netlify.app/
+https://zippy-lamington-793e65.netlify.app/
