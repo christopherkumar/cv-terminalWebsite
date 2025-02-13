@@ -9,21 +9,6 @@ function maintainFocus() {
 inputText.textContent = '';
 maintainFocus();
 
-inputField.addEventListener("input", function () {
-    // Fully reset #input-text each time to prevent duplication issues
-    inputText.textContent = inputField.value; 
-
-    // Ensure empty input clears the display properly
-    if (inputField.value === "") {
-        inputText.textContent = "\u00A0"; // Keeps layout stable when empty
-    }
-
-    // Keep cursor at the end
-    setTimeout(() => {
-        inputField.selectionStart = inputField.selectionEnd = inputField.value.length;
-    }, 0);
-});
-
 // inputField.addEventListener("keydown", function (event) {
 //     if (event.key === "Enter") {
 //         const command = inputField.value.trim();
@@ -161,11 +146,22 @@ document.getElementById("terminal-input").addEventListener("keydown", function (
             outputDiv.appendChild(outputElement);
         }
 
-        // Reset input
+        // Reset input field and displayed text
         this.value = "";
-        document.getElementById("input-text").textContent = "\u00A0";
+        document.getElementById("input-text").textContent = "\u00A0"; // Ensures empty display without layout issues
         outputDiv.scrollTop = outputDiv.scrollHeight; // Auto-scroll to bottom
     }
+});
+
+// Ensure input updates correctly, including backspace behavior
+document.getElementById("terminal-input").addEventListener("input", function () {
+    const value = this.value;
+    document.getElementById("input-text").textContent = value || "\u00A0"; // Clear display if empty
+
+    // Keep cursor at end of input
+    setTimeout(() => {
+        this.selectionStart = this.selectionEnd = value.length;
+    }, 0);
 });
 
 function toggleMode() {
