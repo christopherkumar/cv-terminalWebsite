@@ -11,6 +11,7 @@ maintainFocus();
 
 inputField.addEventListener("input", function () {
     inputText.textContent = inputField.value;
+    maintainFocus();  // Ensure focus is maintained
 });
 
 // inputField.addEventListener("keydown", function (event) {
