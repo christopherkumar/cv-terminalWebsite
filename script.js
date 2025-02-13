@@ -12,6 +12,11 @@ maintainFocus();
 inputField.addEventListener("input", function () {
     const value = inputField.value;
     inputText.textContent = value;
+    
+    // Force cursor to end of text
+    setTimeout(() => {
+        inputField.selectionStart = inputField.selectionEnd = value.length;
+    }, 0);
 });
 
 // inputField.addEventListener("keydown", function (event) {
