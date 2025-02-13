@@ -9,9 +9,16 @@ function maintainFocus() {
 inputText.textContent = '';
 maintainFocus();
 
-inputField.addEventListener("input", function () {
+inputField.addEventListener("input", function (event) {
+    // Get the current value of the input field
     const value = inputField.value;
-    inputText.textContent = value;
+
+    // Check if the backspace key was pressed
+    if (event.inputType === "deleteContentBackward") {
+        inputText.textContent = value; // Reflect deletion
+    } else {
+        inputText.textContent = value; // Update text normally
+    }
 
     // Ensure the cursor stays at the end of input
     setTimeout(() => {
