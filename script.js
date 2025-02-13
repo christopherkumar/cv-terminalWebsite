@@ -10,15 +10,19 @@ inputText.textContent = '';
 maintainFocus();
 
 inputField.addEventListener("input", function () {
-    // Directly mirror input value to the display element
-    inputText.textContent = inputField.value || "\u00A0"; 
+    // Fully reset #input-text each time to prevent duplication issues
+    inputText.textContent = inputField.value; 
 
-    // Keep cursor at the end of input
+    // Ensure empty input clears the display properly
+    if (inputField.value === "") {
+        inputText.textContent = "\u00A0"; // Keeps layout stable when empty
+    }
+
+    // Keep cursor at the end
     setTimeout(() => {
         inputField.selectionStart = inputField.selectionEnd = inputField.value.length;
     }, 0);
 });
-
 
 // inputField.addEventListener("keydown", function (event) {
 //     if (event.key === "Enter") {
