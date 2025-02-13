@@ -9,6 +9,10 @@ function maintainFocus() {
 inputText.textContent = '';
 maintainFocus();
 
+inputField.addEventListener("input", function () {
+    inputText.textContent = inputField.value;
+});
+
 // inputField.addEventListener("keydown", function (event) {
 //     if (event.key === "Enter") {
 //         const command = inputField.value.trim();
@@ -146,22 +150,11 @@ document.getElementById("terminal-input").addEventListener("keydown", function (
             outputDiv.appendChild(outputElement);
         }
 
-        // Reset input field and displayed text
+        // Reset input
         this.value = "";
-        document.getElementById("input-text").textContent = "\u00A0"; // Ensures empty display without layout issues
+        document.getElementById("input-text").textContent = "\u00A0";
         outputDiv.scrollTop = outputDiv.scrollHeight; // Auto-scroll to bottom
     }
-});
-
-// Ensure input updates correctly, including backspace behavior
-document.getElementById("terminal-input").addEventListener("input", function () {
-    const value = this.value;
-    document.getElementById("input-text").textContent = value || "\u00A0"; // Clear display if empty
-
-    // Keep cursor at end of input
-    setTimeout(() => {
-        this.selectionStart = this.selectionEnd = value.length;
-    }, 0);
 });
 
 function toggleMode() {
