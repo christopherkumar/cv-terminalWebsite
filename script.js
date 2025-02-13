@@ -12,8 +12,8 @@ maintainFocus();
 inputField.addEventListener("input", function () {
     const value = inputField.value;
     inputText.textContent = value;
-    
-    // Force cursor to end of text
+
+    // Ensure the cursor stays at the end of input
     setTimeout(() => {
         inputField.selectionStart = inputField.selectionEnd = value.length;
     }, 0);
