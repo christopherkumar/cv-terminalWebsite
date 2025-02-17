@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Handle keydown events for the input field
 inputField.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
+        // Handle the command when Enter is pressed
         handleCommand(inputField.value.trim());
         inputField.value = "";
         inputText.textContent = " ";
     }
 });
-
 
 // Introductory text displayed in the terminal
 const introText = `
@@ -107,6 +107,7 @@ function toggleDetails(id) {
     inputField.focus();
 }
 
+// Function to maintain focus on the input field
 function maintainFocus() {
     inputField.focus();
 }

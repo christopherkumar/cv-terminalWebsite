@@ -52,14 +52,11 @@ body {
     font-family: inherit;
 }
 
-
-
 .input-line {
     align-items: center;
     display: flex;
     gap: 5px;
 }
-
 
 /* Light Mode Styles */
 .light-mode {

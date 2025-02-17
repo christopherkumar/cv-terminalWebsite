@@ -1,5 +1,15 @@
+// Define the commands and their corresponding HTML content
 window.commands = {
-    "skills": `
+    "skills": getSkillsContent(),
+    "experience": getExperienceContent(),
+    "projects": getProjectsContent(),
+    "research": getResearchContent(),
+    "contact": getContactContent()
+};
+
+// Function to get the content for the "skills" command
+function getSkillsContent() {
+    return `
         <ul>
             <li>
                 <span class="toggle" onclick="toggleDetails('skill1')">[+] </span>Programming Languages
@@ -8,7 +18,7 @@ window.commands = {
                         <li>Python (Machine Learning, AI, Automation)</li>
                         <li>C++ / C & Arduino (Embedded Systems, High-Performance Computing)</li>
                         <li>MATLAB & Simulink (Engineering Applications)</li>
-                        <li>HTML, JS & CSS(Web Development, App Development)</li>
+                        <li>HTML, JS & CSS (Web Development, App Development)</li>
                     </ul>
                 </div>
             </li>
@@ -19,7 +29,7 @@ window.commands = {
                         <li>AI & ML: TensorFlow, PyTorch, scikit-learn</li>
                         <li>Databases: SQLite, ChromaDB, FAISS, LanceDB</li>
                         <li>Engineering & Design: AutoCAD, MATLAB</li>
-                        <li>General: Microsoft Office Suite, LibreOffice Suite ,Git</li>
+                        <li>General: Microsoft Office Suite, LibreOffice Suite, Git</li>
                     </ul>
                 </div>
             </li>
@@ -43,8 +53,12 @@ window.commands = {
                 </div>
             </li>
         </ul>
-    `,
-    "experience": `
+    `;
+}
+
+// Function to get the content for the "experience" command
+function getExperienceContent() {
+    return `
         <ul>
             <li>
                 <span class="toggle" onclick="toggleDetails('exp1')">[+] </span>AI/LLM Engineering Intern (2024)
@@ -75,9 +89,13 @@ window.commands = {
                 </div>
             </li>
         </ul>
-    `,
-    "projects": `
-       <ul>
+    `;
+}
+
+// Function to get the content for the "projects" command
+function getProjectsContent() {
+    return `
+        <ul>
             <li>
                 <span class="toggle" onclick="toggleDetails('proj1')">[+] </span>LLM Grading Study
                 <div id="proj1" class="details" style="display: none;">
@@ -107,8 +125,12 @@ window.commands = {
                 </div>
             </li>
         </ul>
-    `,
-    "research": `
+    `;
+}
+
+// Function to get the content for the "research" command
+function getResearchContent() {
+    return `
         <ul>
             <li>
                 <span class="toggle" onclick="toggleDetails('research1')">[+] </span>Effect of Camera Model and Camera Settings in Image Classification
@@ -141,12 +163,16 @@ window.commands = {
                 </div>
             </li>
         </ul>
-    `,
-    "contact": `
+    `;
+}
+
+// Function to get the content for the "contact" command
+function getContactContent() {
+    return `
         <ul>
             <li>Email: <a href='mailto:christopherkumar812@gmail.com'>christopherkumar812@gmail.com</a></li>
             <li>LinkedIn: <a href='https://www.linkedin.com/in/christopher-kumar/'>linkedin.com/in/christopher-kumar</a></li>
             <li>GitHub: <a href='https://github.com/Christopher-Kumar'>github.com/Christopher-Kumar</a></li>
         </ul>
-    `
-};
+    `;
+}
