@@ -39,13 +39,20 @@ body {
 
 /* Input Handling */
 .input-field {
-    caret-color: transparent;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    width: 0;
+    caret-color: #58a6ff !important;  /* Change caret color */
+    opacity: 1 !important;            /* Make input visible */
+    position: static;                 /* Keep it in normal flow */
+    width: auto;                       /* Adjust width dynamically */
+    left: 0;                           /* Reset positioning */
+    background: transparent;           /* Keep terminal theme */
+    color: inherit;                    /* Match text color */
+    border: none;                      /* Remove borders */
+    outline: none;                      /* No outline */
+    font-size: inherit;
+    font-family: inherit;
 }
+
+
 
 .input-line {
     align-items: center;
@@ -53,23 +60,6 @@ body {
     gap: 5px;
 }
 
-/* Cursor Animation */
-.blinking-cursor {
-    animation: blink 1s infinite;
-    background-color: #58a6ff;
-    display: inline-block;
-    height: 16px;
-    left: 0;
-    margin-left: 0;
-    position: relative;
-    width: 4px;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
 
 /* Light Mode Styles */
 .light-mode {

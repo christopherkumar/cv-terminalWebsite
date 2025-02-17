@@ -13,28 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
     startTypingSequence();
 });
 
-// Update the input text display as the user types
-inputField.addEventListener("input", () => {
-    requestAnimationFrame(() => {
-        inputText.textContent = inputField.value;
-    });
-});
-
 // Handle keydown events for the input field
 inputField.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-        // Handle the command when Enter is pressed
         handleCommand(inputField.value.trim());
         inputField.value = "";
-        inputText.textContent = " ";
-    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        // Update the cursor position display for left and right arrow keys
-        requestAnimationFrame(() => {
-            const cursorPosition = inputField.selectionStart;
-            inputText.textContent = inputField.value.substring(0, cursorPosition) + "|" + inputField.value.substring(cursorPosition);
-        });
+        inputText.textContent = " ";
     }
 });
+
 
 // Introductory text displayed in the terminal
 const introText = `
@@ -103,5 +90,9 @@ function toggleDetails(id) {
         details.style.display = "none";
         toggle.textContent = "[+] ";
     }
+    inputField.focus();
+}
+
+function maintainFocus() {
     inputField.focus();
 }
