@@ -13,22 +13,6 @@ inputField.addEventListener("input", function () {
     inputText.textContent = inputField.value;
 });
 
-// inputField.addEventListener("keydown", function (event) {
-//     if (event.key === "Enter") {
-//         const command = inputField.value.trim();
-//         if (command) {
-//             outputDiv.innerHTML = `<p><span class='prompt'>➜ ~ </span>${command}</p>`;
-
-//             // Access commands via window.commands
-//             outputDiv.innerHTML += window.commands[command] || `<p>Command not found. Try: skills, experience, projects, contact.</p>`;
-
-//             inputField.value = "";
-//             inputText.textContent = "\u00A0";
-//             outputDiv.scrollTop = outputDiv.scrollHeight;
-//         }
-//     }
-// });
-
 let introLoaded = false; // Prevents multiple initializations
 
 function typeText(element, text, speed = 50, callback = null) {
