@@ -27,11 +27,15 @@ inputField.addEventListener("keydown", function (event) {
 const introText = `
     <p class="prompt">➜ ~ whoami</p>
     <p class="prompt">Christopher Kumar</p>
+    <p>Engineer. Developer. Problem Solver.</p>
+    <p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>
     <ul>
         <li>Bachelor of Engineering (Honours) - Computer Systems</li>
-        <li>Foundation Science</li>
+        <li>Experienced in AI, LLMs, and software engineering</li>
+        <li>Always learning, always building.</li>
     </ul>
-    <p class="prompt">➜ ~ Available commands: skills, experience, projects, contact, clear, light, dark</p>`;
+    <p class="prompt">➜ ~ Type a command to explore:</p>
+    <p>skills | experience | projects | contact | clear | light | dark</p>`;
 
 // Function to handle commands entered by the user
 function handleCommand(command) {
@@ -66,7 +70,7 @@ function handleCommand(command) {
         outputDiv.appendChild(commandElement);
         
         let responseElement = document.createElement("div");
-        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills, experience, projects, contact, clear, light, dark.</p>`;
+        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | contact | clear | light | dark</p>`;
         outputDiv.appendChild(responseElement);
     }
     // Scroll to the bottom of the output div
