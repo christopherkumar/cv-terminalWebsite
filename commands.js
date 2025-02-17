@@ -99,6 +99,40 @@ window.commands = {
             </li>
         </ul>
     `,
+    "research": `
+        <ul>
+            <li>
+                <span class="toggle" onclick="toggleDetails('research1')">[+] </span>Effect of Camera Model and Camera Settings in Image Classification
+                <div id="research1" class="details" style="display: none;">
+                    <ul>
+                        <li>Investigated how camera hardware and settings impact machine learning image classification accuracy.</li>
+                        <li>Developed a standardized image-capturing process to ensure consistent data collection.</li>
+                        <li>Analyzed the effects of noise, white balance, exposure, and lens selection on classification outcomes.</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleDetails('research2')">[+] </span>A Comparative Study of the Grading Capabilities of Large Language Models
+                <div id="research2" class="details" style="display: none;">
+                    <ul>
+                        <li>Compared OpenAI (GPT-4, GPT-4 Turbo) with open-source models (Llama, Mistral) for automated grading.</li>
+                        <li>Developed a framework using text-based and numeric rubrics to evaluate grading accuracy.</li>
+                        <li>Identified GPT-4 Turbo as the most accurate for structured assessments, with potential improvements in hybrid rubrics.</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleDetails('research3')">[+] </span>Evaluation of Retrieval-Augmented Generation (RAG) Systems
+                <div id="research3" class="details" style="display: none;">
+                    <ul>
+                        <li>Tested five different RAG implementations for retrieving and generating accurate responses.</li>
+                        <li>Determined OpenAI's vector-based RAG as the most reliable, with 24/30 successful responses.</li>
+                        <li>Assessed the limitations of open-source RAG models, identifying potential for future refinements.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    `,
     "contact": `
         <ul>
             <li>Email: <a href='mailto:christopherkumar812@gmail.com'>christopherkumar812@gmail.com</a></li>

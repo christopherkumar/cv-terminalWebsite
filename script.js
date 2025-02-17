@@ -35,7 +35,7 @@ const introText = `
         <li>Always learning, always building.</li>
     </ul>
     <p class="prompt">➜ ~ Type a command to explore:</p>
-    <p>skills | experience | projects | contact | clear | light | dark</p>`;
+    <p>skills | experience | projects | research | contact | clear | light | dark</p>`;
 
 // Function to handle commands entered by the user
 function handleCommand(command) {
