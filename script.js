@@ -69,17 +69,17 @@ function handleCommand(command) {
             outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
         }
     } else {
-        // Keep the original case of the input command in display
+        // Display the command and its response
+        outputDiv.innerHTML = introText;
         let commandElement = document.createElement("p");
         commandElement.classList.add("prompt");
         commandElement.innerHTML = `➜ ~ ${command}`;
         outputDiv.appendChild(commandElement);
         
         let responseElement = document.createElement("div");
-        responseElement.innerHTML = window.commands[matchedCommand];
+        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | contact | clear | light | dark</p>`;
         outputDiv.appendChild(responseElement);
     }
-
     // Scroll to the bottom of the output div
     outputDiv.scrollTop = outputDiv.scrollHeight;
 }
