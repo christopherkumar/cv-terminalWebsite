@@ -40,6 +40,7 @@ const introText = `
 // Function to handle commands entered by the user
 function handleCommand(command) {
     if (!command) return;
+    command = command.toLowerCase();
     if (command === "clear") {
         // Clear the terminal and display the intro text
         outputDiv.innerHTML = introText;
