@@ -6,9 +6,9 @@ window.commands = {
                 <div id="skill1" class="details" style="display: none;">
                     <ul>
                         <li>Python (Machine Learning, AI, Automation)</li>
-                        <li>C++ / C (Embedded Systems, High-Performance Computing)</li>
+                        <li>C++ / C & Arduino (Embedded Systems, High-Performance Computing)</li>
                         <li>MATLAB & Simulink (Engineering Applications)</li>
-                        <li>Arduino, Visual Basic (Hardware & Control Systems)</li>
+                        <li>HTML, JS & CSS(Web Development, App Development)</li>
                     </ul>
                 </div>
             </li>
@@ -19,7 +19,7 @@ window.commands = {
                         <li>AI & ML: TensorFlow, PyTorch, scikit-learn</li>
                         <li>Databases: SQLite, ChromaDB, FAISS, LanceDB</li>
                         <li>Engineering & Design: AutoCAD, MATLAB</li>
-                        <li>General: Microsoft Office Suite, Git</li>
+                        <li>General: Microsoft Office Suite, LibreOffice Suite ,Git</li>
                     </ul>
                 </div>
             </li>
@@ -28,8 +28,17 @@ window.commands = {
                 <div id="skill3" class="details" style="display: none;">
                     <ul>
                         <li>LLMs: OpenAI, Anthropic, Ollama, HuggingFace</li>
-                        <li>Networking: Cisco configuration, Circuit design</li>
+                        <li>Networking: Cisco configuration</li>
                         <li>Systems: Linux, Windows, WSL, Docker</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <span class="toggle" onclick="toggleDetails('skill4')">[+] </span>Electronics & Hardware
+                <div id="skill4" class="details" style="display: none;">
+                    <ul>
+                        <li>Electronics: Circuit design, PCB layout, soldering</li>
+                        <li>Computer Hardware: Assembly, troubleshooting</li>
                     </ul>
                 </div>
             </li>
