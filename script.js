@@ -71,7 +71,7 @@ function handleCommand(command) {
         outputDiv.appendChild(commandElement);
         
         let responseElement = document.createElement("div");
-        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | contact | clear | light | dark</p>`;
+        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | research | contact | clear | light | dark</p>`;
         outputDiv.appendChild(responseElement);
     }
     // Scroll to the bottom of the output div
