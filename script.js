@@ -45,36 +45,16 @@ function handleCommand(command) {
         outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
     } else {
         outputDiv.innerHTML = introText;
-        outputDiv.innerHTML += `<p class='prompt'>➜ ~ ${command}</p>`;
-        outputDiv.innerHTML += window.commands[command] || `<p class="prompt">Command not found. Try: skills, experience, projects, contact, clear, light, dark.</p>`;
+        let commandElement = document.createElement("p");
+        commandElement.classList.add("prompt");
+        commandElement.innerHTML = `➜ ~ ${command}`;
+        outputDiv.appendChild(commandElement);
+        
+        let responseElement = document.createElement("div");
+        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills, experience, projects, contact, clear, light, dark.</p>`;
+        outputDiv.appendChild(responseElement);
     }
     outputDiv.scrollTop = outputDiv.scrollHeight;
-}
-
-function typeText(element, text, speed = 50, callback = null) {
-    let index = 0;
-    function type() {
-        if (index < text.length) {
-            element.innerHTML += text.charAt(index);
-            index++;
-            setTimeout(type, speed);
-        } else if (callback) {
-            callback();
-        }
-    }
-    type();
-}
-
-function typeLineByLine(lines, index = 0, callback = null) {
-    if (index >= lines.length) {
-        if (callback) callback();
-        return;
-    }
-    let line = lines[index];
-    let element = document.createElement(line.tag);
-    if (line.class) element.classList.add(line.class);
-    document.getElementById("terminal-output").appendChild(element);
-    typeText(element, line.text, 30, () => typeLineByLine(lines, index + 1, callback));
 }
 
 function startTypingSequence() {
