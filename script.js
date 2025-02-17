@@ -40,31 +40,25 @@ const introText = `
 // Function to handle commands entered by the user
 function handleCommand(command) {
     if (!command) return;
-
-    // List of available commands (keys from window.commands)
-    const availableCommands = Object.keys(window.commands).concat(["clear", "light", "dark"]);
-
-    // Find a matching command regardless of case
-    const matchedCommand = availableCommands.find(cmd => cmd.toLowerCase() === command.toLowerCase());
-
-    if (!matchedCommand) {
-        outputDiv.innerHTML = introText + `<p class="prompt">Command not found. Try: skills | experience | projects | research | contact | clear | light | dark</p>`;
-        return;
-    }
-
-    if (matchedCommand === "clear") {
+    command = command.toLowerCase();
+    if (command === "clear") {
+        // Clear the terminal and display the intro text
         outputDiv.innerHTML = introText;
-    } else if (matchedCommand === "light") {
+    } else if (command === "light") {
         if (document.body.classList.contains("light-mode")) {
+            // If already in light mode, display a message
             outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
         } else {
+            // Switch to light mode
             document.body.classList.add("light-mode");
             outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
         }
-    } else if (matchedCommand === "dark") {
+    } else if (command === "dark") {
         if (!document.body.classList.contains("light-mode")) {
+            // If already in dark mode, display a message
             outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
         } else {
+            // Switch to dark mode
             document.body.classList.remove("light-mode");
             outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
         }
