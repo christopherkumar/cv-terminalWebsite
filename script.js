@@ -40,13 +40,23 @@ function handleCommand(command) {
         // Clear the terminal and display the intro text
         outputDiv.innerHTML = introText;
     } else if (command === "light") {
-        // Switch to light mode
-        document.body.classList.add("light-mode");
-        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
+        if (document.body.classList.contains("light-mode")) {
+            // If already in light mode, display a message
+            outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
+        } else {
+            // Switch to light mode
+            document.body.classList.add("light-mode");
+            outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
+        }
     } else if (command === "dark") {
-        // Switch to dark mode
-        document.body.classList.remove("light-mode");
-        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
+        if (!document.body.classList.contains("light-mode")) {
+            // If already in dark mode, display a message
+            outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
+        } else {
+            // Switch to dark mode
+            document.body.classList.remove("light-mode");
+            outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
+        }
     } else {
         // Display the command and its response
         outputDiv.innerHTML = introText;
