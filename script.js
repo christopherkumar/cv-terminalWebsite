@@ -40,40 +40,46 @@ const introText = `
 // Function to handle commands entered by the user
 function handleCommand(command) {
     if (!command) return;
-    command = command.toLowerCase();
-    if (command === "clear") {
-        // Clear the terminal and display the intro text
+
+    // List of available commands (keys from window.commands)
+    const availableCommands = Object.keys(window.commands).concat(["clear", "light", "dark"]);
+
+    // Find a matching command regardless of case
+    const matchedCommand = availableCommands.find(cmd => cmd.toLowerCase() === command.toLowerCase());
+
+    if (!matchedCommand) {
+        outputDiv.innerHTML = introText + `<p class="prompt">Command not found. Try: skills | experience | projects | research | contact | clear | light | dark</p>`;
+        return;
+    }
+
+    if (matchedCommand === "clear") {
         outputDiv.innerHTML = introText;
-    } else if (command === "light") {
+    } else if (matchedCommand === "light") {
         if (document.body.classList.contains("light-mode")) {
-            // If already in light mode, display a message
             outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
         } else {
-            // Switch to light mode
             document.body.classList.add("light-mode");
             outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
         }
-    } else if (command === "dark") {
+    } else if (matchedCommand === "dark") {
         if (!document.body.classList.contains("light-mode")) {
-            // If already in dark mode, display a message
             outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
         } else {
-            // Switch to dark mode
             document.body.classList.remove("light-mode");
             outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
         }
     } else {
-        // Display the command and its response
-        outputDiv.innerHTML = introText;
+        // Keep the original case of the input command in display
         let commandElement = document.createElement("p");
         commandElement.classList.add("prompt");
         commandElement.innerHTML = `➜ ~ ${command}`;
         outputDiv.appendChild(commandElement);
         
         let responseElement = document.createElement("div");
-        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | contact | clear | light | dark</p>`;
+        responseElement.innerHTML = window.commands[matchedCommand];
         outputDiv.appendChild(responseElement);
     }
+
     // Scroll to the bottom of the output div
     outputDiv.scrollTop = outputDiv.scrollHeight;
 }
