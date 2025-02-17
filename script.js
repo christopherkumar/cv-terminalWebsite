@@ -21,6 +21,11 @@ inputField.addEventListener("keydown", function (event) {
         handleCommand(inputField.value.trim());
         inputField.value = "";
         inputText.textContent = " ";
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        requestAnimationFrame(() => {
+            const cursorPosition = inputField.selectionStart;
+            inputText.textContent = inputField.value.substring(0, cursorPosition) + "|" + inputField.value.substring(cursorPosition);
+        });
     }
 });
 
