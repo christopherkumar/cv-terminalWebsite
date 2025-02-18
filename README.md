@@ -3,7 +3,7 @@
 A web-based interactive resume designed to look and function like a command-line terminal. This project provides a unique and engaging way to showcase **Christopher Kumar’s** skills, experience, projects, and contact information.
 
 ## 🔗 Live Version
-[Visit the site](https://zippy-lamington-793e65.netlify.app/)
+[Visit the site](https://cv-terminalwebsite.netlify.app/)
 
 ## ✨ Features
 - **Terminal-Style Interface**: Mimics a real command-line environment.
