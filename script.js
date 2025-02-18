@@ -3,6 +3,9 @@ const inputField = document.getElementById("terminal-input");
 const inputText = document.getElementById("input-text");
 const outputDiv = document.getElementById("terminal-output");
 
+// List of available commands
+const availableCommands = ["skills", "experience", "projects", "research", "contact", "clear", "light", "dark"];
+
 // Introductory text displayed in the terminal
 const introText = `
     <p class="prompt">➜ ~ whoami</p>
@@ -39,30 +42,44 @@ function initializeInputField() {
 function handleKeydownEvent(event) {
     if (event.key === "Enter") {
         handleCommand(inputField.value.trim());
-        inputField.value = "";
-        inputText.textContent = " ";
+        resetInputField();
     }
+}
+
+// Function to reset the input field
+function resetInputField() {
+    inputField.value = "";
+    inputText.textContent = " ";
 }
 
 // Function to handle commands entered by the user
 function handleCommand(command) {
     if (!command) return;
     command = command.toLowerCase();
+    if (availableCommands.includes(command)) {
+        executeCommand(command);
+    } else {
+        displayCommandResponse(command);
+    }
+    scrollToBottom();
+}
+
+// Function to execute a command
+function executeCommand(command) {
     switch (command) {
         case "clear":
             clearTerminal();
             break;
         case "light":
-            toggleLightMode();
+            toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
             break;
         case "dark":
-            toggleDarkMode();
+            toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
             break;
         default:
             displayCommandResponse(command);
             break;
     }
-    scrollToBottom();
 }
 
 // Function to clear the terminal and display the intro text
@@ -70,23 +87,22 @@ function clearTerminal() {
     outputDiv.innerHTML = introText;
 }
 
-// Function to toggle light mode
-function toggleLightMode() {
-    if (document.body.classList.contains("light-mode")) {
-        outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
+// Function to toggle light or dark mode
+function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
+    if (remove) {
+        if (!document.body.classList.contains(modeClass)) {
+            outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+        } else {
+            document.body.classList.remove(modeClass);
+            outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+        }
     } else {
-        document.body.classList.add("light-mode");
-        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
-    }
-}
-
-// Function to toggle dark mode
-function toggleDarkMode() {
-    if (!document.body.classList.contains("light-mode")) {
-        outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
-    } else {
-        document.body.classList.remove("light-mode");
-        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
+        if (document.body.classList.contains(modeClass)) {
+            outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+        } else {
+            document.body.classList.add(modeClass);
+            outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+        }
     }
 }
 
