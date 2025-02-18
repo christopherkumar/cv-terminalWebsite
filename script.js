@@ -3,26 +3,6 @@ const inputField = document.getElementById("terminal-input");
 const inputText = document.getElementById("input-text");
 const outputDiv = document.getElementById("terminal-output");
 
-// Focus the input field when the document is clicked
-document.addEventListener("click", () => inputField.focus());
-
-// Initialize the input field and start the typing sequence when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    inputField.value = "";
-    inputText.textContent = "";
-    startTypingSequence();
-});
-
-// Handle keydown events for the input field
-inputField.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        // Handle the command when Enter is pressed
-        handleCommand(inputField.value.trim());
-        inputField.value = "";
-        inputText.textContent = " ";
-    }
-});
-
 // Introductory text displayed in the terminal
 const introText = `
     <p class="prompt">➜ ~ whoami</p>
@@ -37,44 +17,94 @@ const introText = `
     <p class="prompt">➜ ~ Type a command to explore:</p>
     <p>skills | experience | projects | research | contact | clear | light | dark</p>`;
 
+// Initialize the input field and start the typing sequence when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    initializeInputField();
+    startTypingSequence();
+});
+
+// Focus the input field when the document is clicked
+document.addEventListener("click", () => inputField.focus());
+
+// Handle keydown events for the input field
+inputField.addEventListener("keydown", handleKeydownEvent);
+
+// Function to initialize the input field
+function initializeInputField() {
+    inputField.value = "";
+    inputText.textContent = "";
+}
+
+// Function to handle keydown events
+function handleKeydownEvent(event) {
+    if (event.key === "Enter") {
+        handleCommand(inputField.value.trim());
+        inputField.value = "";
+        inputText.textContent = " ";
+    }
+}
+
 // Function to handle commands entered by the user
 function handleCommand(command) {
     if (!command) return;
     command = command.toLowerCase();
-    if (command === "clear") {
-        // Clear the terminal and display the intro text
-        outputDiv.innerHTML = introText;
-    } else if (command === "light") {
-        if (document.body.classList.contains("light-mode")) {
-            // If already in light mode, display a message
-            outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
-        } else {
-            // Switch to light mode
-            document.body.classList.add("light-mode");
-            outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
-        }
-    } else if (command === "dark") {
-        if (!document.body.classList.contains("light-mode")) {
-            // If already in dark mode, display a message
-            outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
-        } else {
-            // Switch to dark mode
-            document.body.classList.remove("light-mode");
-            outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
-        }
-    } else {
-        // Display the command and its response
-        outputDiv.innerHTML = introText;
-        let commandElement = document.createElement("p");
-        commandElement.classList.add("prompt");
-        commandElement.innerHTML = `➜ ~ ${command}`;
-        outputDiv.appendChild(commandElement);
-        
-        let responseElement = document.createElement("div");
-        responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | research | contact | clear | light | dark</p>`;
-        outputDiv.appendChild(responseElement);
+    switch (command) {
+        case "clear":
+            clearTerminal();
+            break;
+        case "light":
+            toggleLightMode();
+            break;
+        case "dark":
+            toggleDarkMode();
+            break;
+        default:
+            displayCommandResponse(command);
+            break;
     }
-    // Scroll to the bottom of the output div
+    scrollToBottom();
+}
+
+// Function to clear the terminal and display the intro text
+function clearTerminal() {
+    outputDiv.innerHTML = introText;
+}
+
+// Function to toggle light mode
+function toggleLightMode() {
+    if (document.body.classList.contains("light-mode")) {
+        outputDiv.innerHTML = introText + `<p class="prompt">Already in Light Mode.</p>`;
+    } else {
+        document.body.classList.add("light-mode");
+        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Light Mode.</p>`;
+    }
+}
+
+// Function to toggle dark mode
+function toggleDarkMode() {
+    if (!document.body.classList.contains("light-mode")) {
+        outputDiv.innerHTML = introText + `<p class="prompt">Already in Dark Mode.</p>`;
+    } else {
+        document.body.classList.remove("light-mode");
+        outputDiv.innerHTML = introText + `<p class="prompt">Switched to Dark Mode.</p>`;
+    }
+}
+
+// Function to display the command and its response
+function displayCommandResponse(command) {
+    outputDiv.innerHTML = introText;
+    let commandElement = document.createElement("p");
+    commandElement.classList.add("prompt");
+    commandElement.innerHTML = `➜ ~ ${command}`;
+    outputDiv.appendChild(commandElement);
+    
+    let responseElement = document.createElement("div");
+    responseElement.innerHTML = window.commands[command] || `<p class="prompt">Command not found. Try: skills | experience | projects | research | contact | clear | light | dark</p>`;
+    outputDiv.appendChild(responseElement);
+}
+
+// Function to scroll to the bottom of the output div
+function scrollToBottom() {
     outputDiv.scrollTop = outputDiv.scrollHeight;
 }
 
@@ -97,11 +127,9 @@ function toggleDetails(id) {
     const toggle = details.previousElementSibling;
     
     if (details.style.display === "none" || details.style.display === "") {
-        // Show the details section and update the toggle text
         details.style.display = "block";
         toggle.textContent = "[-] ";
     } else {
-        // Hide the details section and update the toggle text
         details.style.display = "none";
         toggle.textContent = "[+] ";
     }
