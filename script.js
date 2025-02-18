@@ -3,9 +3,6 @@ const inputField = document.getElementById("terminal-input");
 const inputText = document.getElementById("input-text");
 const outputDiv = document.getElementById("terminal-output");
 
-// List of available commands
-const availableCommands = ["skills", "experience", "projects", "research", "contact", "clear", "light", "dark"];
-
 // Introductory text displayed in the terminal
 const introText = `
     <p class="prompt">➜ ~ whoami</p>
@@ -44,9 +41,6 @@ function handleKeydownEvent(event) {
         handleCommand(inputField.value.trim());
         inputField.value = "";
         inputText.textContent = " ";
-    } else if (event.key === "Tab") {
-        event.preventDefault();
-        autocompleteCommand();
     }
 }
 
@@ -145,14 +139,4 @@ function toggleDetails(id) {
 // Function to maintain focus on the input field
 function maintainFocus() {
     inputField.focus();
-}
-
-// Function to autocomplete the command based on the current input
-function autocompleteCommand() {
-    const currentInput = inputField.value.trim().toLowerCase();
-    const matchingCommands = availableCommands.filter(cmd => cmd.startsWith(currentInput));
-    if (matchingCommands.length === 1) {
-        inputField.value = matchingCommands[0];
-        inputText.textContent = matchingCommands[0];
-    }
 }
