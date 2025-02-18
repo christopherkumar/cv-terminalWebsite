@@ -131,12 +131,6 @@ function startTypingSequence() {
     outputDiv.innerHTML = introText;
 }
 
-// Function to toggle between light and dark modes
-function toggleMode() {
-    document.body.classList.toggle("light-mode");
-    inputField.focus();
-}
-
 // Function to toggle the display of details sections
 function toggleDetails(id) {
     const details = document.getElementById(id);
