@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<!-- Charset definition for proper text encoding -->
-		<meta charset="UTF-8">
-		<!-- Viewport meta tag to ensure proper rendering on mobile devices -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Title of the website -->
-		<title>Christopher Kumar - cvTerminalWebsite</title>
-		<!-- Meta description for SEO purposes -->
-		<meta name="description" content="Christopher Kumar's portfolio terminal website showcasing skills, experience, projects, and research in AI, software development, and engineering.">
-		<!-- Meta keywords for search engines -->
-		<meta name="keywords" content="Christopher Kumar, portfolio, AI, software development, engineering, terminal website">
-		<!-- Link to the external stylesheet for site-wide styling -->
-		<link rel="stylesheet" href="style.css">
-	</head>
-	<body onclick="maintainFocus()">
-		<!-- Main container for the terminal interface -->
-		<div class="container terminal">
-			<!-- Output area where dynamic terminal text will be displayed -->
-			<div id="terminal-output"></div>
-			
-			<!-- Input line containing the prompt and the command input field -->
-			<div class="input-line">
-				<!-- Terminal prompt symbol -->
-				<span class="prompt">➜ ~ </span>
-				<!-- Wrapper for displaying the dynamically typed input text -->
-				<span id="input-wrapper">
-					<span id="input-text">&nbsp;</span>
-				</span>
-				<!-- Text input field for user commands with autofocus and ARIA labeling for accessibility -->
-				<input type="text" class="input-field" id="terminal-input" autofocus aria-label="Terminal input">
-			</div>
-		</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christopher Kumar - cvTerminalWebsite</title>
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="Christopher Kumar's portfolio terminal website showcasing skills, experience, projects, and research in AI, software development, and engineering.">
+  <meta name="keywords" content="Christopher Kumar, portfolio, AI, software development, engineering, terminal website">
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onclick="maintainFocus()">
+  <!-- Terminal container -->
+  <div class="container terminal">
+    <!-- Output area where text will be dynamically typed -->
+    <div id="terminal-output"></div>
+    
+    <!-- Input line for user commands -->
+    <div class="input-line">
+      <span class="prompt">➜ ~ </span>
+      <span id="input-wrapper">
+        <span id="input-text">&nbsp;</span>
+      </span>
+      <input type="text" class="input-field" id="terminal-input" autofocus aria-label="Terminal input">
+    </div>            
+  </div>
 
-		<!-- Include external JavaScript files that manage terminal commands and interactions -->
-		<script src="commands.js"></script>
-		<script src="script.js"></script>
-	</body>
+  <!-- Include external JavaScript files -->
+  <script src="commands.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
