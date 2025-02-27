@@ -6,6 +6,15 @@
 
 // Encapsulate all code within an IIFE
 (function() {
+	document.addEventListener("DOMContentLoaded", () => {
+		initializeInputField();
+		startTypingSequence();
+	
+		if (!isMobileDevice()) {
+			inputField.focus(); // Ensure desktop users can type immediately
+		}
+	});	
+
 	// Get references to the input field, input text display, and output div
 	const inputField = document.getElementById("terminal-input");
 	const inputText = document.getElementById("input-text");
@@ -64,10 +73,9 @@
 		btn.addEventListener("click", (event) => {
 			event.preventDefault();
 			event.stopPropagation(); // Prevent focus shifting to input
-			const command = btn.textContent.trim();
-			executeCommandFromClick(command);
+			executeCommandFromClick(btn.textContent.trim());
 		});
-	});
+	});	
 
 	// Global keydown for additional shortcuts (e.g., Ctrl+L to clear terminal)
 	document.addEventListener("keydown", (event) => {
@@ -242,10 +250,15 @@
 		outputDiv.innerHTML = introText;
 	}
 
+	function isMobileDevice() {
+		return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+	}
+
 	// Function to toggle the display of details sections with ARIA support
-	window.toggleDetails = function(id) {
+	window.toggleDetails = function(id, event) {
 		const details = document.getElementById(id);
 		const toggle = details.previousElementSibling;
+	
 		if (details.style.display === "none" || details.style.display === "") {
 			details.style.display = "block";
 			toggle.textContent = "[-] ";
@@ -255,15 +268,20 @@
 			toggle.textContent = "[+] ";
 			toggle.setAttribute("aria-expanded", "false");
 		}
-		// Smooth transition effect
-		details.style.transition = "all 0.3s ease";
-		inputField.focus();
+	
+		// Prevent mobile keyboard when clicking collapsible items
+		if (isMobileDevice()) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
 	};
 
 	// Function to maintain focus on the input field
 	window.maintainFocus = function(event) {
-		if (event.target !== inputField) {
-			event.preventDefault(); // Prevent default keyboard popup behavior
+		if (!isMobileDevice()) {
+			inputField.focus(); // Always focus input field on desktop
+		} else if (event.target !== inputField) {
+			event.preventDefault(); // Prevent mobile keyboard from opening unless clicked
 		}
 	};	
 })();
