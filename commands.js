@@ -123,11 +123,11 @@ function generateListItem(key, value) {
     const id = key.replace(/\s+/g, '');
     return `
         <li>
-            <span class="toggle" onclick="toggleDetails('${id}')">[+] </span>${key}
-            <div id="${id}" class="details" style="display: none;">
-                <ul>
-                    ${value.map(item => `<li>${item}</li>`).join('')}
-                </ul>
+            <span class="toggle" onclick="toggleDetails('${id}')" title="Click to expand/collapse details" aria-expanded="false" aria-controls="${id}" aria-label="Toggle details for ${key}">[+] </span>${key}
+            <div id="${id}" class="details">
+            <ul>
+                ${value.map(item => `<li>${item}</li>`).join('')}
+            </ul>
             </div>
         </li>
     `;
