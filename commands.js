@@ -99,13 +99,14 @@ function getResearchContent() {
 
 // Function to get the content for the "contact" command
 function getContactContent() {
-    const contact = {
-        "Email": ["<a href='mailto:christopherkumar812@gmail.com'>christopherkumar812@gmail.com</a>"],
-        "LinkedIn": ["<a href='https://www.linkedin.com/in/christopher-kumar/'>linkedin.com/in/christopher-kumar</a>"],
-        "GitHub": ["<a href='https://github.com/Christopher-Kumar'>github.com/Christopher-Kumar</a>"],
-        "LeetCode": ["<a href='https://leetcode.com/u/cvkumar812'>https://leetcode.com/u/cvkumar812</a>"]
-    };
-    return generateContent(contact);
+    return `
+        <div class="contact-section">
+            <p><a href="mailto:christopherkumar812@gmail.com">christopherkumar812@gmail.com</a></p>
+            <p><a href="https://www.linkedin.com/in/christopher-kumar/">linkedin.com/in/christopher-kumar</a></p>
+            <p><a href="https://github.com/Christopher-Kumar">github.com/Christopher-Kumar</a></p>
+            <p><a href="https://leetcode.com/u/cvkumar812">leetcode.com/u/cvkumar812</a></p>
+        </div>
+    `;
 }
 
 // Function to generate HTML content from a structured object
