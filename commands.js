@@ -14,7 +14,7 @@ function getSkillsContent() {
             "Python (Machine Learning, AI, Automation)",
             "C++ / C & Arduino (Embedded Systems, High-Performance Computing)",
             "MATLAB & Simulink (Engineering Applications)",
-            "HTML, JS & CSS (Web Development, App Development)"
+            "HTML, JS & CSS (Web Development)"
         ],
         "Software & Tools": [
             "AI & ML: TensorFlow, PyTorch, scikit-learn",
