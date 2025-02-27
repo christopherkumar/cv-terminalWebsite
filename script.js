@@ -1,3 +1,9 @@
+/*
+ * script.js
+ * This script handles user input and manages the terminal interface for the interactive resume website.
+ * It processes commands, maintains command history, and enables features like theme switching and auto-completion.
+ */
+
 // Encapsulate all code within an IIFE
 (function() {
 	// Get references to the input field, input text display, and output div
@@ -5,7 +11,7 @@
 	const inputText = document.getElementById("input-text");
 	const outputDiv = document.getElementById("terminal-output");
 
-	// List of available commands with descriptions (help removed)
+	// List of available commands with descriptions
 	const availableCommands = {
 		"skills": "Display skills.",
 		"experience": "Display work experience.",

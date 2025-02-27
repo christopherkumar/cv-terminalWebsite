@@ -1,3 +1,9 @@
+/*
+ * commands.js
+ * This script defines the available commands and their corresponding content for the interactive resume terminal.
+ * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and contact information.
+ */
+
 // Define the commands and their corresponding content
 window.commands = {
     "skills": getSkillsContent(),
