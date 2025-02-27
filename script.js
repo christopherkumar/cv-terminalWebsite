@@ -137,21 +137,12 @@
 
 	// Function to execute a command
 	function executeCommand(command) {
-		switch (command) {
-			case "clear":
-				clearTerminal();
-				break;
-			case "light":
-				toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
-				break;
-			case "dark":
-				toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
-				break;
-			default:
-				displayCommandResponse(command);
-				break;
-		}
-	}
+		if (command === "clear") return clearTerminal();
+		if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
+		if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
+		
+		displayCommandResponse(command);
+	}	
 
 	// Function to clear the terminal and display the intro text
 	function clearTerminal() {
