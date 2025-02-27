@@ -1,44 +1,35 @@
-// script.js: Handles terminal interactions, command processing, and UI updates.
-// This file manages user input, command history, theme toggling, and displays
-// content provided by commands.js (which is loaded via a script tag in index.html).
-
+// Encapsulate all code within an IIFE
 (function() {
-	// -------------------------------
-	// DOM Element References
-	// -------------------------------
+	// Get references to the input field, input text display, and output div
 	const inputField = document.getElementById("terminal-input");
 	const inputText = document.getElementById("input-text");
 	const outputDiv = document.getElementById("terminal-output");
 
-	// -------------------------------
-	// Terminal Command Definitions
-	// -------------------------------
+	// List of available commands with descriptions (help removed)
 	const availableCommands = {
-		skills: "Display skills.",
-		experience: "Display work experience.",
-		projects: "Display projects.",
-		research: "Display research.",
-		contact: "Display contact information.",
-		clear: "Clear the terminal.",
-		light: "Switch to light mode.",
-		dark: "Switch to dark mode."
+		"skills": "Display skills.",
+		"experience": "Display work experience.",
+		"projects": "Display projects.",
+		"research": "Display research.",
+		"contact": "Display contact information.",
+		"clear": "Clear the terminal.",
+		"light": "Switch to light mode.",
+		"dark": "Switch to dark mode."
 	};
+
+	// Array of command keys for easy checking
 	const commandKeys = Object.keys(availableCommands);
 
-	// -------------------------------
-	// Command History Management
-	// -------------------------------
+	// Command history array and index for navigation
 	let commandHistory = [];
 	let historyIndex = -1;
 
-	// -------------------------------
-	// Introductory Text
-	// -------------------------------
+	// Introductory text displayed in the terminal (help removed)
 	const introText = `
 		<p class="prompt">➜ ~ whoami</p>
 		<p class="prompt">Christopher Kumar</p>
 		<p>Engineer. Developer. Problem Solver.</p>
-		<p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive at the intersection of AI, software development, and real-world solutions.</p>
+		<p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>
 		<ul>
 			<li>Bachelor of Engineering (Honours) - Computer Systems</li>
 			<li>Experienced in AI, LLMs, and software engineering</li>
@@ -47,192 +38,211 @@
 		<p class="prompt">➜ ~ Type a command to explore:</p>
 		<p>${commandKeys.join(" | ")}</p>`;
 
-	// -------------------------------
-	// Command Handlers Mapping
-	// -------------------------------
-	// These handlers are for commands that are managed entirely within this file.
-	const commandHandlers = {
-		clear: clearTerminal,
-		light: () => toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode."),
-		dark: () => toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true)
-	};
-
-	// -------------------------------
-	// Initialization
-	// -------------------------------
-	// When the DOM is ready, initialize the input field and display the intro text.
+	// Initialize the input field and start the typing sequence when the DOM is fully loaded
 	document.addEventListener("DOMContentLoaded", () => {
 		initializeInputField();
 		startTypingSequence();
 	});
-	// Maintain input focus on any click.
+
+	// Focus the input field when the document is clicked
 	document.addEventListener("click", () => inputField.focus());
-	// Global keydown: Ctrl+L clears the terminal.
-	document.addEventListener("keydown", event => {
+
+	// Global keydown for additional shortcuts (e.g., Ctrl+L to clear terminal)
+	document.addEventListener("keydown", (event) => {
+		// If Ctrl+L is pressed, clear the terminal
 		if (event.ctrlKey && event.key.toLowerCase() === "l") {
 			event.preventDefault();
 			clearTerminal();
 		}
 	});
-	// Listen for key events in the input field.
+
+	// Handle keydown events for the input field
 	inputField.addEventListener("keydown", handleKeydownEvent);
 
-	// -------------------------------
-	// Input Field Helpers
-	// -------------------------------
-	// Clears the input field and resets any temporary display text.
+	// Function to initialize the input field
 	function initializeInputField() {
 		inputField.value = "";
 		inputText.textContent = "";
 	}
-	// Resets the input field after a command is submitted.
+
+	// Function to handle keydown events
+	function handleKeydownEvent(event) {
+		if (event.key === "Enter") {
+			const command = inputField.value.trim();
+			if (command) {
+				commandHistory.push(command);
+				historyIndex = commandHistory.length; // Reset history index
+			}
+			handleCommand(command);
+			resetInputField();
+		} else if (event.key === "ArrowUp") {
+			// Navigate command history backwards
+			if (commandHistory.length > 0 && historyIndex > 0) {
+				historyIndex--;
+				inputField.value = commandHistory[historyIndex];
+				event.preventDefault();
+			}
+		} else if (event.key === "ArrowDown") {
+			// Navigate command history forwards
+			if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+				historyIndex++;
+				inputField.value = commandHistory[historyIndex];
+				event.preventDefault();
+			} else {
+				historyIndex = commandHistory.length;
+				inputField.value = "";
+				event.preventDefault();
+			}
+		} else if (event.key === "Tab") {
+			// Autocomplete command on Tab key
+			event.preventDefault();
+			const currentInput = inputField.value.trim();
+			const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
+			if (match) {
+				inputField.value = match;
+			}
+		}
+	}
+
+	// Function to reset the input field
 	function resetInputField() {
 		inputField.value = "";
 		inputText.textContent = " ";
 	}
 
-	// -------------------------------
-	// Event Handlers
-	// -------------------------------
-	// Handles key events (Enter, ArrowUp, ArrowDown, Tab) using guard clauses.
-	function handleKeydownEvent(event) {
-		if (event.key === "Enter") {
-			const command = inputField.value.trim();
-			if (!command) return;
-			commandHistory.push(command);
-			historyIndex = commandHistory.length;
-			processCommand(command.toLowerCase());
-			resetInputField();
-			return;
-		}
-		if (event.key === "ArrowUp") {
-			if (commandHistory.length && historyIndex > 0) {
-				inputField.value = commandHistory[--historyIndex];
-			}
-			event.preventDefault();
-			return;
-		}
-		if (event.key === "ArrowDown") {
-			if (commandHistory.length && historyIndex < commandHistory.length - 1) {
-				inputField.value = commandHistory[++historyIndex];
-			} else {
-				historyIndex = commandHistory.length;
-				inputField.value = "";
-			}
-			event.preventDefault();
-			return;
-		}
-		if (event.key === "Tab") {
-			event.preventDefault();
-			const currentInput = inputField.value.trim();
-			const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
-			if (match) inputField.value = match;
-		}
-	}
-
-	// -------------------------------
-	// Command Processing Functions
-	// -------------------------------
-	// Processes the given command, updates the terminal output, and calls the appropriate handler.
-	function processCommand(command) {
+	// Function to handle commands entered by the user
+	function handleCommand(command) {
+		if (!command) return;
+		command = command.toLowerCase();
 		outputDiv.innerHTML = introText;
-		appendPrompt(`➜ ~ ${command}`);
-		// Use a handler if one exists, otherwise display the command's content.
-		if (commandHandlers[command]) {
-			commandHandlers[command]();
+
+		let commandElement = document.createElement("p");
+		commandElement.classList.add("prompt");
+		commandElement.innerHTML = `➜ ~ ${command}`;
+		outputDiv.appendChild(commandElement);
+
+		if (commandKeys.includes(command)) {
+			executeCommand(command);
 		} else {
-			displayCommandResponse(command);
+			displayUnknownCommand(command);
 		}
 		scrollToBottom();
 	}
 
-	// Appends a prompt line to the terminal output.
-	function appendPrompt(text) {
-		const p = document.createElement("p");
-		p.className = "prompt";
-		p.textContent = text;
-		outputDiv.appendChild(p);
+	// Function to execute a command
+	function executeCommand(command) {
+		switch (command) {
+			case "clear":
+				clearTerminal();
+				break;
+			case "light":
+				toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
+				break;
+			case "dark":
+				toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
+				break;
+			default:
+				displayCommandResponse(command);
+				break;
+		}
 	}
 
-	// Loads and displays command content.
-	// Since commands.js is already included via a script tag in index.html,
-	// we can directly process the command response.
-	function displayCommandResponse(command) {
-		processCommandResponse(command);
-	}
-
-	// Appends an error message with an ARIA alert role.
-	function appendError(message) {
-		const errorElement = document.createElement("div");
-		errorElement.className = "command-output";
-		errorElement.setAttribute("role", "alert");
-		errorElement.innerHTML = `<p class="prompt">${message}</p>`;
-		outputDiv.appendChild(errorElement);
-	}
-
-	// Processes and displays the command response from the commands module.
-	function processCommandResponse(command) {
-		const responseHTML =
-			window.commands[command] ||
-			`<p class="prompt">No content available for ${command}.</p>`;
-		const responseElement = document.createElement("div");
-		responseElement.className = "command-output";
-		responseElement.setAttribute("role", "status");
-		responseElement.innerHTML = responseHTML;
-		outputDiv.appendChild(responseElement);
-	}
-
-	// -------------------------------
-	// Terminal Utility Functions
-	// -------------------------------
-	// Clears the terminal output and resets it to the introductory text.
+	// Function to clear the terminal and display the intro text
 	function clearTerminal() {
 		outputDiv.innerHTML = introText;
 	}
 
-	// Toggles the light/dark mode by adding or removing a CSS class.
-	// Parameters:
-	//		modeClass - The CSS class representing the mode.
-	//		alreadyMessage - Message if the mode is already active/inactive.
-	//		switchedMessage - Message to display upon a successful toggle.
-	//		remove (optional) - If true, indicates removal of the mode.
+	// Function to toggle light or dark mode
 	function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
-		const isModeActive = document.body.classList.contains(modeClass);
-		if (remove ? !isModeActive : isModeActive) {
-			outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+		if (remove) {
+			if (!document.body.classList.contains(modeClass)) {
+				outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+			} else {
+				document.body.classList.remove(modeClass);
+				outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+			}
 		} else {
-			document.body.classList.toggle(modeClass, !remove);
-			outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+			if (document.body.classList.contains(modeClass)) {
+				outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+			} else {
+				document.body.classList.add(modeClass);
+				outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+			}
 		}
 	}
 
-	// Scrolls the terminal output to the bottom.
+	// Function to display the command and its response using lazy-loading for the commands module
+	function displayCommandResponse(command) {
+		if (!window.commands) {
+			// Lazy-load the commands module if not already loaded
+			import("./commands.js")
+				.then(() => {
+					processCommandResponse(command);
+				})
+				.catch(err => {
+					console.error("Failed to load commands module:", err);
+					let errorElement = document.createElement("div");
+					errorElement.innerHTML = `<p class="prompt">Error loading command content.</p>`;
+					errorElement.classList.add("command-output");
+					errorElement.setAttribute("role", "alert");
+					outputDiv.appendChild(errorElement);
+				});
+		} else {
+			processCommandResponse(command);
+		}
+	}
+
+	// Helper function to process and display command responses
+	function processCommandResponse(command) {
+		let responseElement = document.createElement("div");
+		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
+		// Apply fade-in animation to command outputs and set ARIA role for status updates
+		responseElement.classList.add("command-output");
+		responseElement.setAttribute("role", "status");
+		outputDiv.appendChild(responseElement);
+	}
+
+	// Function to display unknown command error
+	function displayUnknownCommand(command) {
+		let errorElement = document.createElement("div");
+		errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
+		// Apply fade-in animation and mark error messages as alerts for assistive tech
+		errorElement.classList.add("command-output");
+		errorElement.setAttribute("role", "alert");
+		outputDiv.appendChild(errorElement);
+	}
+
+	// Function to scroll to the bottom of the output div
 	function scrollToBottom() {
 		outputDiv.scrollTop = outputDiv.scrollHeight;
 	}
 
-	// Displays the introductory text when the terminal first loads.
+	// Function to start the typing sequence and display the intro text
 	function startTypingSequence() {
 		if (window.introLoaded) return;
 		window.introLoaded = true;
 		outputDiv.innerHTML = introText;
 	}
 
-	// -------------------------------
-	// Global Functions for Interactivity
-	// -------------------------------
-	// Toggle function for expanding/collapsing details with ARIA updates.
-	// This is used in commands.js via the onclick attribute.
+	// Function to toggle the display of details sections with ARIA support
 	window.toggleDetails = function(id) {
 		const details = document.getElementById(id);
 		const toggle = details.previousElementSibling;
-		const expanded = details.classList.toggle("expanded");
-		toggle.textContent = expanded ? "[-] " : "[+] ";
-		toggle.setAttribute("aria-expanded", String(expanded));
+		if (details.style.display === "none" || details.style.display === "") {
+			details.style.display = "block";
+			toggle.textContent = "[-] ";
+			toggle.setAttribute("aria-expanded", "true");
+		} else {
+			details.style.display = "none";
+			toggle.textContent = "[+] ";
+			toggle.setAttribute("aria-expanded", "false");
+		}
+		// Smooth transition effect
+		details.style.transition = "all 0.3s ease";
 		inputField.focus();
 	};
 
-	// Keeps the input field focused.
+	// Function to maintain focus on the input field
 	window.maintainFocus = function() {
 		inputField.focus();
 	};
