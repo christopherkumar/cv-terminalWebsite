@@ -53,8 +53,21 @@
 		startTypingSequence();
 	});
 
-	// Focus the input field when the document is clicked
-	document.addEventListener("click", () => inputField.focus());
+	// Only focus input when user clicks on it
+	inputField.addEventListener("click", (event) => {
+		event.stopPropagation(); // Prevent unwanted bubbling
+		inputField.focus();
+	});
+
+	// Prevent keyboard opening when clicking a command
+	document.querySelectorAll(".command-btn").forEach((btn) => {
+		btn.addEventListener("click", (event) => {
+			event.preventDefault();
+			event.stopPropagation(); // Prevent focus shifting to input
+			const command = btn.textContent.trim();
+			executeCommandFromClick(command);
+		});
+	});
 
 	// Global keydown for additional shortcuts (e.g., Ctrl+L to clear terminal)
 	document.addEventListener("keydown", (event) => {
@@ -248,7 +261,9 @@
 	};
 
 	// Function to maintain focus on the input field
-	window.maintainFocus = function() {
-		inputField.focus();
-	};
+	window.maintainFocus = function(event) {
+		if (event.target !== inputField) {
+			event.preventDefault(); // Prevent default keyboard popup behavior
+		}
+	};	
 })();
