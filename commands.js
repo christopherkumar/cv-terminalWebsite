@@ -1,7 +1,7 @@
 /*
  * commands.js
  * This script defines the available commands and their corresponding content for the interactive resume terminal.
- * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and contact information.
+ * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and links information.
  */
 
 // Define the commands and their corresponding content
@@ -10,7 +10,7 @@ window.commands = {
     "experience": getExperienceContent(),
     "projects": getProjectsContent(),
     "research": getResearchContent(),
-    "contact": getContactContent()
+    "links": getLinksContent()
 };
 
 // Function to get the content for the "skills" command
@@ -103,10 +103,10 @@ function getResearchContent() {
     return generateContent(research);
 }
 
-// Function to get the content for the "contact" command
-function getContactContent() {
+// Function to get the content for the "links" command
+function getLinksContent() {
     return `
-        <ul class="contact-section">
+        <ul class="links-section">
             <li><a href="mailto:christopherkumar812@gmail.com">Email</a></li>
             <li><a href="https://www.linkedin.com/in/christopher-kumar/">LinkedIn</a></li>
             <li><a href="https://github.com/Christopher-Kumar">GitHub</a></li>
