@@ -100,12 +100,12 @@ function getResearchContent() {
 // Function to get the content for the "contact" command
 function getContactContent() {
     return `
-        <div class="contact-section">
-            <p><a href="mailto:christopherkumar812@gmail.com">christopherkumar812@gmail.com</a></p>
-            <p><a href="https://www.linkedin.com/in/christopher-kumar/">linkedin.com/in/christopher-kumar</a></p>
-            <p><a href="https://github.com/Christopher-Kumar">github.com/Christopher-Kumar</a></p>
-            <p><a href="https://leetcode.com/u/cvkumar812">leetcode.com/u/cvkumar812</a></p>
-        </div>
+        <ul class="contact-section">
+            <li><a href="mailto:christopherkumar812@gmail.com">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/christopher-kumar/">LinkedIn</a></li>
+            <li><a href="https://github.com/Christopher-Kumar">GitHub</a></li>
+            <li><a href="https://leetcode.com/u/cvkumar812">LeetCode</a></li>
+        </ul>
     `;
 }
 
