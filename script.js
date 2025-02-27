@@ -118,7 +118,7 @@
 
 	// Function to handle commands entered by the user
 	function handleCommand(command) {
-		if (!command) return;
+		if (!command.trim()) return;
 		command = command.toLowerCase();
 		outputDiv.innerHTML = introText;
 
