@@ -40,7 +40,9 @@ body {
   border-radius: 10px;
   max-width: 800px;
   padding: 20px;
-  width: 80%;
+  width: calc(100% - 10px); /* Ensures at least 5px padding on both sides */
+  margin: 5px; /* Ensures at least 5px space from the viewport edges */
+  box-sizing: border-box; /* Includes padding in width calculation */
 }
 
 /* ***********
@@ -56,9 +58,11 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   height: 80vh;
   overflow-y: auto;
-  padding: 20px;
   transition: background 0.3s, color 0.3s;
+  padding: 20px;
+  max-height: calc(100vh - 10px); /* Ensures 5px padding on top and bottom */
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Prompt */
@@ -201,14 +205,15 @@ a:hover {
  @media (max-width: 600px) {
   /* Responsive styling for the container */
   .container {
-    width: 95%;
+    width: calc(100% - 10px);
     padding: 10px;
+    margin: 5px;
   }
-  
+
   /* Adjust terminal size for smaller screens */
   .terminal {
-    height: 70vh;
     padding: 10px;
+    max-height: calc(100vh - 10px);
   }
 
   /* Adjust font size for input field on smaller screens */
