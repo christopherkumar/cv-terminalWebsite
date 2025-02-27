@@ -123,11 +123,11 @@ function generateListItem(key, value) {
     const id = key.replace(/\s+/g, '');
     return `
         <li>
-            <span class="toggle" onclick="toggleDetails('${id}')">[+] </span>${key}
+            <span class="toggle" onclick="toggleDetails('${id}')" title="Click to expand/collapse details">[+] </span>${key}
             <div id="${id}" class="details" style="display: none;">
-                <ul>
-                    ${value.map(item => `<li>${item}</li>`).join('')}
-                </ul>
+            <ul>
+                ${value.map(item => `<li>${item}</li>`).join('')}
+            </ul>
             </div>
         </li>
     `;
