@@ -109,7 +109,7 @@ function getLinksContent() {
         <ul class="links-section">
             <li><a href="mailto:christopherkumar812@gmail.com">Email</a></li>
             <li><a href="https://www.linkedin.com/in/christopher-kumar/">LinkedIn</a></li>
-            <li><a href="https://github.com/Christopher-Kumar">GitHub</a></li>
+            <li><a href="https://github.com/christopherkumar">GitHub</a></li>
             <li><a href="https://leetcode.com/u/cvkumar812">LeetCode</a></li>
         </ul>
     `;
