@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christopher Kumar - cvTerminalWebsite</title>
-    <!-- Link to the external stylesheet -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christopher Kumar - cvTerminalWebsite</title>
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="Christopher Kumar's portfolio terminal website showcasing skills, experience, projects, and research in AI, software development, and engineering.">
+  <meta name="keywords" content="Christopher Kumar, portfolio, AI, software development, engineering, terminal website">
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body onclick="maintainFocus()">
-    <!-- Controls for toggling light/dark mode -->
-    <div class="controls">
-        <div class="toggle-switch" onclick="toggleMode()">
-            <div></div>
-        </div>
-    </div>
+  <!-- Terminal container -->
+  <div class="container terminal">
+    <!-- Output area where text will be dynamically typed -->
+    <div id="terminal-output"></div>
+    
+    <!-- Input line for user commands -->
+    <div class="input-line">
+      <span class="prompt">➜ ~ </span>
+      <span id="input-wrapper">
+        <span id="input-text">&nbsp;</span>
+      </span>
+      <input type="text" class="input-field" id="terminal-input" autofocus aria-label="Terminal input">
+    </div>            
+  </div>
 
-    <!-- Terminal container -->
-    <div class="container terminal">
-        <!-- Output area where text will be dynamically typed -->
-        <div id="terminal-output"></div>
-        
-        <!-- Input line for user commands -->
-        <div class="input-line">
-            <span class="prompt">➜ ~ </span>
-            <span id="input-wrapper">
-                <span id="input-text">&nbsp;</span>
-            </span>
-            <input type="text" class="input-field" id="terminal-input" autofocus>
-        </div>            
-    </div>
-
-    <!-- Include external JavaScript files -->
-    <script src="commands.js"></script>
-    <script src="script.js"></script>
+  <!-- Include external JavaScript files -->
+  <script src="commands.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
