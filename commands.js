@@ -102,7 +102,8 @@ function getContactContent() {
     const contact = {
         "Email": ["<a href='mailto:christopherkumar812@gmail.com'>christopherkumar812@gmail.com</a>"],
         "LinkedIn": ["<a href='https://www.linkedin.com/in/christopher-kumar/'>linkedin.com/in/christopher-kumar</a>"],
-        "GitHub": ["<a href='https://github.com/Christopher-Kumar'>github.com/Christopher-Kumar</a>"]
+        "GitHub": ["<a href='https://github.com/Christopher-Kumar'>github.com/Christopher-Kumar</a>"],
+        "LeetCode": ["a href='https://leetcode.com/u/cvkumar812/'"]
     };
     return generateContent(contact);
 }
