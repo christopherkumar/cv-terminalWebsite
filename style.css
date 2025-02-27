@@ -160,6 +160,11 @@ a:hover {
   transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
+/* Ensure cursor changes to pointer when hovering over the [+] toggle */
+.toggle {
+  cursor: pointer;
+}
+
 /* ***********
  * 6. Animations & Effects 
  * Defines a fade-in animation for smooth transitions when commands are entered.
