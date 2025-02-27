@@ -42,7 +42,10 @@
 			<li>Always learning, always building.</li>
 		</ul>
 		<p class="prompt">➜ ~ Type a command to explore:</p>
-		<p>${commandKeys.join(" | ")}</p>`;
+		<p>
+			${commandKeys.map(cmd => `<span class="command-btn" onclick="executeCommandFromClick('${cmd}')">${cmd}</span>`).join(" | ")}
+		</p>
+		`;
 
 	// Initialize the input field and start the typing sequence when the DOM is fully loaded
 	document.addEventListener("DOMContentLoaded", () => {
@@ -208,6 +211,11 @@
 		errorElement.setAttribute("role", "alert");
 		outputDiv.appendChild(errorElement);
 	}
+
+	// Function to handle command button clicks
+	window.executeCommandFromClick = function(command) {
+		handleCommand(command);
+	};
 
 	// Function to scroll to the bottom of the output div
 	function scrollToBottom() {

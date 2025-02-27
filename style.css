@@ -95,6 +95,14 @@ body {
   gap: 5px;
 }
 
+/* Clickable command buttons in terminal */
+.command-btn {
+  color: #58a6ff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
 /* ***********
  * 4. Light Mode Styles 
  * Overrides dark mode settings to provide a light theme alternative.
