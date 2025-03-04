@@ -4,270 +4,276 @@
  * It processes commands, maintains command history, and enables features like theme switching and auto-completion.
  */
 
-// Encapsulate all code within an IIFE
 (function() {
-	document.addEventListener("DOMContentLoaded", () => {
-		initializeInputField();
-		startTypingSequence();	
-		if (!isMobileDevice()) inputField.focus();
-	});	
-
-	// Get references to the input field, input text display, and output div
+	// ======================================================
+	// 1. Element References and Global Variables
+	// ======================================================
 	const inputField = document.getElementById("terminal-input");
 	const inputText = document.getElementById("input-text");
 	const outputDiv = document.getElementById("terminal-output");
-
-	// List of available commands with descriptions
+  
 	const availableCommands = {
-		"skills": "Display skills.",
-		"experience": "Display work experience.",
-		"projects": "Display projects.",
-		"research": "Display research.",
-		"links": "Display links information.",
-		"clear": "Clear the terminal.",
-		"light": "Switch to light mode.",
-		"dark": "Switch to dark mode."
+	  "skills": "Display skills.",
+	  "experience": "Display work experience.",
+	  "projects": "Display projects.",
+	  "research": "Display research.",
+	  "links": "Display links information.",
+	  "clear": "Clear the terminal.",
+	  "light": "Switch to light mode.",
+	  "dark": "Switch to dark mode."
 	};
 	const commandKeys = Object.keys(availableCommands);
 	let commandHistory = [];
 	let historyIndex = -1;
-
-	// Introductory text displayed in the terminal (help removed)
+	let tabCycleIndex = 0;
+  
 	const introText = `
-		<p class="prompt">➜ ~ whoami</p>
-		<p class="prompt">Christopher Kumar</p>
-		<p>Engineer. Developer. Problem Solver.</p>
-		<p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>
-		<ul>
-			<li>Bachelor of Engineering (Honours) - Computer Systems</li>
-			<li>Experienced in AI, LLMs, and software engineering</li>
-			<li>Always learning, always building.</li>
-		</ul>
-		<p class="prompt">➜ ~ Type a command to explore:</p>
-		<p>
-			${commandKeys.map(cmd => `<span class="command-btn" onclick="executeCommandFromClick('${cmd}')">${cmd}</span>`).join(" | ")}
-		</p>
-		`;
-
-	// Prevent keyboard opening when clicking a command
-	document.querySelectorAll(".command-btn").forEach((btn) => {
-		btn.addEventListener("click", (event) => {
-			event.preventDefault();
-			event.stopPropagation(); // Prevent focus shifting to input
-			executeCommandFromClick(btn.textContent.trim());
-		});
-	});	
-
-	// Global keydown for additional shortcuts (e.g., Ctrl+L to clear terminal)
-	document.addEventListener("keydown", (event) => {
-		// If Ctrl+L is pressed, clear the terminal
-		if (event.ctrlKey && event.key.toLowerCase() === "l") {
-			event.preventDefault();
-			clearTerminal();
-		}
+	  <p class="prompt">➜ ~ whoami</p>
+	  <p class="prompt">Christopher Kumar</p>
+	  <p>Engineer. Developer. Problem Solver.</p>
+	  <p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>
+	  <ul>
+		<li>Bachelor of Engineering (Honours) - Computer Systems</li>
+		<li>Experienced in AI, LLMs, and software engineering</li>
+		<li>Always learning, always building.</li>
+	  </ul>
+	  <p class="prompt">➜ ~ Type a command to explore:</p>
+	  <p>
+		${commandKeys.map(cmd => `<span class="command-btn" onclick="executeCommandFromClick('${cmd}')">${cmd}</span>`).join(" | ")}
+	  </p>
+	`;
+  
+	// ======================================================
+	// 2. Initialization and Global Event Listeners
+	// ======================================================
+	document.addEventListener("DOMContentLoaded", () => {
+	  initializeInputField();
+	  startTypingSequence();
+	  handleInputFocus();
 	});
-
-	// Handle keydown events for the input field
+  
+	// Reassign maintainFocus to the helper function
+	window.maintainFocus = handleInputFocus;
+  
+	// Global keydown for shortcuts (e.g., Ctrl+L to clear terminal)
+	document.addEventListener("keydown", (event) => {
+	  if (event.ctrlKey && event.key.toLowerCase() === "l") {
+		event.preventDefault();
+		clearTerminal();
+	  }
+	});
+  
+	// Attach click event to command buttons
+	document.querySelectorAll(".command-btn").forEach((btn) => {
+	  btn.addEventListener("click", (event) => {
+		event.preventDefault();
+		event.stopPropagation();
+		executeCommandFromClick(btn.textContent.trim());
+	  });
+	});
+  
+	// Listen for keydown events on the input field
 	inputField.addEventListener("keydown", handleKeydownEvent);
-
-	// Function to initialize the input field
+  
+	// ======================================================
+	// 3. Utility and Helper Functions
+	// ======================================================
 	function initializeInputField() {
-		inputField.value = "";
-		inputText.textContent = "";
+	  inputField.value = "";
+	  inputText.textContent = "";
 	}
-
-	// Function to handle keydown events
+  
+	function handleInputFocus(event) {
+	  if (!isMobileDevice()) {
+		inputField.focus();
+	  } else if (event && event.target !== inputField) {
+		event.preventDefault();
+	  }
+	}
+  
+	function resetInputField() {
+	  inputField.value = "";
+	  inputText.textContent = "";
+	}
+  
+	function resetTerminalOutput() {
+	  outputDiv.innerHTML = introText;
+	}
+  
+	function scrollToBottom() {
+	  outputDiv.scrollTop = outputDiv.scrollHeight;
+	}
+  
+	function isMobileDevice() {
+	  return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+	}
+  
+	// ======================================================
+	// 4. Command Processing Functions
+	// ======================================================
+	function handleCommand(command) {
+	  if (!command.trim()) return;
+	  command = command.toLowerCase();
+	  resetTerminalOutput();
+  
+	  let commandElement = document.createElement("p");
+	  commandElement.classList.add("prompt");
+	  commandElement.innerHTML = `➜ ~ ${command}`;
+	  outputDiv.appendChild(commandElement);
+  
+	  if (commandKeys.includes(command)) {
+		executeCommand(command);
+	  } else {
+		displayUnknownCommand(command);
+	  }
+	  scrollToBottom();
+	}
+  
+	function executeCommand(command) {
+	  if (command === "clear") return clearTerminal();
+	  if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
+	  if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
+  
+	  displayCommandResponse(command);
+	}
+  
+	function displayCommandResponse(command) {
+	  processCommandResponse(command);
+	}
+  
+	function processCommandResponse(command) {
+	  let responseElement = document.createElement("div");
+	  responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
+	  responseElement.classList.add("command-output");
+	  responseElement.setAttribute("role", "status");
+	  outputDiv.appendChild(responseElement);
+	}
+  
+	function displayUnknownCommand(command) {
+	  let errorElement = document.createElement("div");
+	  errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
+	  errorElement.classList.add("command-output");
+	  errorElement.setAttribute("role", "alert");
+	  outputDiv.appendChild(errorElement);
+	}
+  
+	function clearTerminal() {
+	  resetTerminalOutput();
+	}
+  
+	// ======================================================
+	// 5. Theme and UI Toggling Functions
+	// ======================================================
+	function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
+	  const shouldHaveClass = !remove;
+	  const isClassPresent = document.body.classList.contains(modeClass);
+  
+	  if (isClassPresent === shouldHaveClass) {
+		outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+	  } else {
+		if (shouldHaveClass) {
+		  document.body.classList.add(modeClass);
+		} else {
+		  document.body.classList.remove(modeClass);
+		}
+		outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+	  }
+	}
+  
+	// ======================================================
+	// 6. Input Field Keydown Event Handler
+	// ======================================================
 	function handleKeydownEvent(event) {
-		switch (event.key) {
-		  case "Enter":
-			const command = inputField.value.trim();
-			if (command) {
-			  commandHistory.push(command);
-			  historyIndex = commandHistory.length; // Reset history index to end
+	  switch (event.key) {
+		case "Enter":
+		  const command = inputField.value.trim();
+		  if (command) {
+			commandHistory.push(command);
+			historyIndex = commandHistory.length;
+		  }
+		  handleCommand(command);
+		  resetInputField();
+		  break;
+  
+		case "ArrowUp":
+		  if (commandHistory.length > 0 && historyIndex > 0) {
+			historyIndex--;
+			inputField.value = commandHistory[historyIndex];
+		  }
+		  event.preventDefault();
+		  break;
+  
+		case "ArrowDown":
+		  if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+			historyIndex++;
+			inputField.value = commandHistory[historyIndex];
+		  } else {
+			historyIndex = commandHistory.length;
+			inputField.value = "";
+		  }
+		  event.preventDefault();
+		  break;
+  
+		case "Tab":
+		  const currentInput = inputField.value.trim();
+		  // If input is empty OR already matches a full command, cycle through commands
+		  if (currentInput === "" || commandKeys.includes(currentInput)) {
+			if (commandKeys.includes(currentInput)) {
+			  const currentIndex = commandKeys.indexOf(currentInput);
+			  tabCycleIndex = (currentIndex + 1) % commandKeys.length;
 			}
-			handleCommand(command);
-			resetInputField();
-			break;
-			
-		  case "ArrowUp":
-			if (commandHistory.length > 0 && historyIndex > 0) {
-			  historyIndex--;
-			  inputField.value = commandHistory[historyIndex];
-			}
-			event.preventDefault();
-			break;
-			
-		  case "ArrowDown":
-			if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
-			  historyIndex++;
-			  inputField.value = commandHistory[historyIndex];
-			} else {
-			  // At the end of history or no history - clear input
-			  historyIndex = commandHistory.length;
-			  inputField.value = "";
-			}
-			event.preventDefault();
-			break;
-			
-		  case "Tab":
-			const currentInput = inputField.value.trim();
+			inputField.value = commandKeys[tabCycleIndex];
+			tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
+		  } else {
+			// Auto-complete based on the partial command
 			const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
 			if (match) {
 			  inputField.value = match;
 			}
-			event.preventDefault();
-			break;
-		}
+			tabCycleIndex = 0;
+		  }
+		  event.preventDefault();
+		  break;
+  
+		default:
+		  tabCycleIndex = 0;
+		  break;
 	  }
-
-	// Function to reset the input field
-	function resetInputField() {
-		inputField.value = "";
-		inputText.textContent = " ";
 	}
-
-	// Function to handle commands entered by the user
-	function handleCommand(command) {
-		if (!command.trim()) return;
-		command = command.toLowerCase();
-		outputDiv.innerHTML = introText;
-
-		let commandElement = document.createElement("p");
-		commandElement.classList.add("prompt");
-		commandElement.innerHTML = `➜ ~ ${command}`;
-		outputDiv.appendChild(commandElement);
-
-		if (commandKeys.includes(command)) {
-			executeCommand(command);
-		} else {
-			displayUnknownCommand(command);
-		}
-		scrollToBottom();
-	}
-
-	// Function to execute a command
-	function executeCommand(command) {
-		if (command === "clear") return clearTerminal();
-		if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
-		if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
-		
-		displayCommandResponse(command);
-	}	
-
-	// Function to clear the terminal and display the intro text
-	function clearTerminal() {
-		outputDiv.innerHTML = introText;
-	}
-
-	// Function to toggle light or dark mode
-	function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
-		if (remove) {
-			if (!document.body.classList.contains(modeClass)) {
-				outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
-			} else {
-				document.body.classList.remove(modeClass);
-				outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
-			}
-		} else {
-			if (document.body.classList.contains(modeClass)) {
-				outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
-			} else {
-				document.body.classList.add(modeClass);
-				outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
-			}
-		}
-	}
-
-	// Function to display the command and its response using lazy-loading for the commands module
-	function displayCommandResponse(command) {
-		if (!window.commands) {
-			// Lazy-load the commands module if not already loaded
-			import("./commands.js")
-				.then(() => {
-					processCommandResponse(command);
-				})
-				.catch(err => {
-					console.error("Failed to load commands module:", err);
-					let errorElement = document.createElement("div");
-					errorElement.innerHTML = `<p class="prompt">Error loading command content.</p>`;
-					errorElement.classList.add("command-output");
-					errorElement.setAttribute("role", "alert");
-					outputDiv.appendChild(errorElement);
-				});
-		} else {
-			processCommandResponse(command);
-		}
-	}
-
-	// Helper function to process and display command responses
-	function processCommandResponse(command) {
-		let responseElement = document.createElement("div");
-		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
-		// Apply fade-in animation to command outputs and set ARIA role for status updates
-		responseElement.classList.add("command-output");
-		responseElement.setAttribute("role", "status");
-		outputDiv.appendChild(responseElement);
-	}
-
-	// Function to display unknown command error
-	function displayUnknownCommand(command) {
-		let errorElement = document.createElement("div");
-		errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
-		// Apply fade-in animation and mark error messages as alerts for assistive tech
-		errorElement.classList.add("command-output");
-		errorElement.setAttribute("role", "alert");
-		outputDiv.appendChild(errorElement);
-	}
-
-	// Function to handle command button clicks
+  
+	// Expose command button click handler globally
 	window.executeCommandFromClick = function(command) {
-		handleCommand(command);
+	  handleCommand(command);
 	};
-
-	// Function to scroll to the bottom of the output div
-	function scrollToBottom() {
-		outputDiv.scrollTop = outputDiv.scrollHeight;
-	}
-
-	// Function to start the typing sequence and display the intro text
+  
+	// ======================================================
+	// 7. Typing Sequence and Additional UI Functions
+	// ======================================================
 	function startTypingSequence() {
-		if (window.introLoaded) return;
-		window.introLoaded = true;
-		outputDiv.innerHTML = introText;
+	  if (window.introLoaded) return;
+	  window.introLoaded = true;
+	  outputDiv.innerHTML = introText;
 	}
-
-	function isMobileDevice() {
-		return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
-	}
-
-	// Function to toggle the display of details sections with ARIA support
+  
 	window.toggleDetails = function(id, event) {
-		const details = document.getElementById(id);
-		const toggle = details.previousElementSibling;
-	
-		if (details.style.display === "none" || details.style.display === "") {
-			details.style.display = "block";
-			toggle.textContent = "[-] ";
-			toggle.setAttribute("aria-expanded", "true");
-		} else {
-			details.style.display = "none";
-			toggle.textContent = "[+] ";
-			toggle.setAttribute("aria-expanded", "false");
-		}
-	
-		// Prevent mobile keyboard when clicking collapsible items
-		if (isMobileDevice()) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
+	  const details = document.getElementById(id);
+	  const toggle = details.previousElementSibling;
+  
+	  if (details.style.display === "none" || details.style.display === "") {
+		details.style.display = "block";
+		toggle.textContent = "[-] ";
+		toggle.setAttribute("aria-expanded", "true");
+	  } else {
+		details.style.display = "none";
+		toggle.textContent = "[+] ";
+		toggle.setAttribute("aria-expanded", "false");
+	  }
+  
+	  if (isMobileDevice()) {
+		event.preventDefault();
+		event.stopPropagation();
+	  }
 	};
-
-	// Function to maintain focus on the input field
-	window.maintainFocus = function(event) {
-		if (!isMobileDevice()) {
-			inputField.focus(); // Always focus input field on desktop
-		} else if (event.target !== inputField) {
-			event.preventDefault(); // Prevent mobile keyboard from opening unless clicked
-		}
-	};	
-})();
+	
+  })();
+  
