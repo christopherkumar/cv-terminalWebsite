@@ -1,38 +1,41 @@
-<!--
- * index.html
- * This is the main entry point for the interactive resume website.
- * It defines the structure of the terminal interface and loads external styles and scripts.
- -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ==================================================
+       Meta Information & SEO
+       ================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Christopher Kumar - cvTerminalWebsite</title>
-  <!-- Meta Tags for SEO -->
   <meta name="description" content="Christopher Kumar's portfolio terminal website showcasing skills, experience, projects, and research in AI, software development, and engineering.">
   <meta name="keywords" content="Christopher Kumar, portfolio, AI, software development, engineering, terminal website">
-  <!-- Link to the external stylesheet -->
+  
+  <!-- ==================================================
+       Stylesheet
+       ================================================== -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body onclick="maintainFocus()">
-  <!-- Terminal container -->
+  <!-- ==================================================
+       Terminal Container & Content
+       ================================================== -->
   <div class="container terminal">
-    <!-- Output area where text will be dynamically typed -->
+    <!-- Terminal Output Area -->
     <div id="terminal-output"></div>
     
-    <!-- Input line for user commands -->
+    <!-- Input Area for User Commands -->
     <div class="input-line">
       <span class="prompt">➜ ~ </span>
       <span id="input-wrapper">
         <span id="input-text">&nbsp;</span>
       </span>
       <input type="text" class="input-field" id="terminal-input" aria-label="Terminal input">
-    </div>            
+    </div>
   </div>
 
-  <!-- Include external JavaScript files -->
+  <!-- ==================================================
+       JavaScript Files
+       ================================================== -->
   <script src="commands.js"></script>
   <script src="script.js"></script>
 </body>
