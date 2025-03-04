@@ -8,11 +8,8 @@
 (function() {
 	document.addEventListener("DOMContentLoaded", () => {
 		initializeInputField();
-		startTypingSequence();
-	
-		if (!isMobileDevice()) {
-			inputField.focus(); // Ensure desktop users can type immediately
-		}
+		startTypingSequence();	
+		if (!isMobileDevice()) inputField.focus();
 	});	
 
 	// Get references to the input field, input text display, and output div
@@ -31,11 +28,7 @@
 		"light": "Switch to light mode.",
 		"dark": "Switch to dark mode."
 	};
-
-	// Array of command keys for easy checking
 	const commandKeys = Object.keys(availableCommands);
-
-	// Command history array and index for navigation
 	let commandHistory = [];
 	let historyIndex = -1;
 
@@ -56,17 +49,11 @@
 		</p>
 		`;
 
-	// Initialize the input field and start the typing sequence when the DOM is fully loaded
-	document.addEventListener("DOMContentLoaded", () => {
-		initializeInputField();
-		startTypingSequence();
-	});
-
 	// Only focus input when user clicks on it
-	inputField.addEventListener("click", (event) => {
-		event.stopPropagation(); // Prevent unwanted bubbling
-		inputField.focus();
-	});
+	// inputField.addEventListener("click", (event) => {
+	// 	event.stopPropagation();
+	// 	inputField.focus();
+	// });
 
 	// Prevent keyboard opening when clicking a command
 	document.querySelectorAll(".command-btn").forEach((btn) => {
