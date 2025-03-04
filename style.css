@@ -1,228 +1,134 @@
-/*
- * style.css
- * This stylesheet defines the appearance of the interactive resume terminal.
- * It supports dark and light themes, animations, and responsive behavior.
- */
-
-/* ***********
- * Import the font from the Google Fonts API 
- * Uses 'Fira Code', a monospaced font ideal for a terminal-like interface.
- * ***********
- */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+/* style.css - Interactive Resume Terminal Styles */
 
 /* ***********
  * 1. General Styles 
- * Defines base styles for layout, typography, and color schemes. 
- * The body is set up as a centered flex container to ensure everything stays in place.
- * ***********
- */
+ * Defines base layout, typography, and color schemes.
+ * ***********/
+ @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
-/* General layout and typography */ 
-body {
-  align-items: center;
-  background: #0d1117;
-  color: #c9d1d9;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Fira Code', monospace;
-  height: 100vh;
-  justify-content: center;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  text-align: left;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Main container for the terminal */
-.container {
-  border-radius: 10px;
-  max-width: 800px;
-  padding: 20px;
-  width: calc(100% - 10px); /* Ensures at least 5px padding on both sides */
-  margin: 5px; /* Ensures at least 5px space from the viewport edges */
-  box-sizing: border-box; /* Includes padding in width calculation */
-}
-
-/* ***********
- * 2. Terminal Styles 
- * Styles the main terminal interface, including background, padding, and shadow effects. 
- * Ensures the terminal is scrollable while maintaining a clean design.
- * *********** 
- */
-/* Input field styling for terminal commands */
-.terminal {
-  background: #161b22;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  height: 80vh;
-  overflow-y: auto;
-  transition: background 0.3s, color 0.3s;
-  padding: 20px;
-  max-height: calc(100vh - 10px); /* Ensures 5px padding on top and bottom */
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Prompt */
-.prompt {
-  color: #58a6ff;
-}
-
-/* ***********
- * 3. Input Handling 
- * Styles the text input field used for commands. 
- * It maintains a transparent background to blend with the terminal.
- * ***********  
- */
-
-/* Input field styling for terminal commands */
-.input-field {
-  caret-color: #58a6ff !important;
-  opacity: 1 !important;
-  position: static;
-  width: auto;
-  left: 0;
-  background: transparent;
-  color: inherit;
-  border: none;
-  outline: none;
-  font-size: inherit;
-  font-family: inherit;
-}
-
-/* Formatting for input line and prompt */
-.input-line {
-  align-items: center;
-  display: flex;
-  gap: 5px;
-}
-
-/* Clickable command buttons in terminal */
-.command-btn {
-  color: #58a6ff;
-  cursor: pointer;
-  font-weight: bold;
-  transition: color 0.2s ease-in-out;
-}
-
-/* ***********
- * 4. Light Mode Styles 
- * Overrides dark mode settings to provide a light theme alternative.
- * Changes background colors, text colors, and link colors accordingly.
- * *********** 
- */
-
-/* Light mode overrides for colors and backgrounds */
-.light-mode {
-  background: #dcdcdc;
-  color: #333;
-}
-
-/* Light mode styling for the terminal */
-.light-mode .terminal {
-  background: #f5f5f5;
-  color: #333;
-}
-
-/* Light mode styling for command prompt */
-.light-mode .prompt {
-  color: #007bff;
-}
-
-/* Light mode link styling */
-.light-mode a {
-  color: #007bff;
-}
-
-/* Hover effect for links in light mode */
-.light-mode a:hover {
-  color: #0056b3;
-}
-
-/* ***********
- * 5. Links & Expandable Sections 
- * Styles hyperlinks and expandable sections within the terminal interface.
- * Ensures clear visual feedback when hovering over links.
- * ***********
- */
-
- /* Default link styling */
-a {
-  color: #58a6ff;
-  text-decoration: none;
-}
-
-/* Hover effect for links */
-a:hover {
-  text-decoration: underline;
-}
-
-/* Expandable sections for skills, projects, etc. */
-.expandable {
-  color: #58a6ff;
-  cursor: pointer;
-}
-
-/* Hidden content that expands when toggled */
-.details {
-  display: none;
-  margin-left: 20px;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-/* Ensure cursor changes to pointer when hovering over the [+] toggle */
-.toggle {
-  cursor: pointer;
-}
-
-/* ***********
- * 6. Animations & Effects 
- * Defines a fade-in animation for smooth transitions when commands are entered.
- * ***********
- */
-
-/* Fade-in animation for command output */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Apply fade-in effect to command responses */
-.command-output {
-  animation: fadeIn 0.5s ease-in;
-}
-
-/* ***********
- * 7. Responsive Design 
- * Adjustments for smaller screens, ensuring usability on mobile devices.
- * Reduces padding and font sizes for a better mobile experience.
- * ***********
- */
-
- /* Responsive design adjustments for smaller screens */
+ body {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   text-align: left;
+   overflow: hidden;
+   background: #0d1117;
+   color: #c9d1d9;
+   font-family: 'Fira Code', monospace;
+   transition: background 0.3s, color 0.3s;
+ }
+ 
+ .container {
+   max-width: 800px;
+   width: calc(100% - 10px);
+   padding: 20px;
+   margin: 5px;
+   border-radius: 10px;
+   box-sizing: border-box;
+ }
+ 
+ /* ***********
+  * 2. Terminal Styles 
+  * Styles the main terminal interface.
+  * ***********/
+ .terminal {
+   width: 100%;
+   height: 80vh;
+   max-height: calc(100vh - 10px);
+   padding: 20px;
+   background: #161b22;
+   border-radius: 8px;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+   overflow-y: auto;
+   transition: background 0.3s, color 0.3s;
+   box-sizing: border-box;
+ }
+ 
+ .prompt { color: #58a6ff; }
+ 
+ /* ***********
+  * 3. Input Handling 
+  * Styles the command input field.
+  * ***********/
+ .input-field {
+   position: static;
+   width: auto;
+   background: transparent;
+   color: inherit;
+   border: none;
+   outline: none;
+   font-size: inherit;
+   font-family: inherit;
+   caret-color: #58a6ff !important;
+   opacity: 1 !important;
+ }
+ 
+ .input-line {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+ }
+ 
+ .command-btn {
+   color: #58a6ff;
+   cursor: pointer;
+   font-weight: bold;
+   transition: color 0.2s ease-in-out;
+ }
+ 
+ /* ***********
+  * 4. Light Mode Styles 
+  * ***********/
+ .light-mode {
+   background: #dcdcdc;
+   color: #333;
+ }
+ 
+ .light-mode .terminal { background: #f5f5f5; color: #333; }
+ .light-mode .prompt, .light-mode a { color: #007bff; }
+ .light-mode a:hover { color: #0056b3; }
+ 
+ /* ***********
+  * 5. Links & Expandable Sections 
+  * ***********/
+ a {
+   color: #58a6ff;
+   text-decoration: none;
+ }
+ 
+ a:hover { text-decoration: underline; }
+ 
+ .expandable { color: #58a6ff; cursor: pointer; }
+ .details {
+   display: none;
+   margin-left: 20px;
+   transition: max-height 0.3s ease, opacity 0.3s ease;
+ }
+ 
+ .toggle { cursor: pointer; }
+ 
+ /* ***********
+  * 6. Animations & Effects 
+  * ***********/
+ @keyframes fadeIn {
+   from { opacity: 0; }
+   to { opacity: 1; }
+ }
+ 
+ .command-output {
+   animation: fadeIn 0.5s ease-in;
+ }
+ 
+ /* ***********
+  * 7. Responsive Design 
+  * ***********/
  @media (max-width: 600px) {
-  /* Responsive styling for the container */
-  .container {
-    width: calc(100% - 10px);
-    padding: 10px;
-    margin: 5px;
-  }
-
-  /* Adjust terminal size for smaller screens */
-  .terminal {
-    padding: 10px;
-    max-height: calc(100vh - 10px);
-  }
-
-  /* Adjust font size for input field on smaller screens */
-  .input-field {
-    font-size: 14px;
-  }
-
-  /* Adjust font size for prompt on smaller screens */
-  .prompt {
-    font-size: 14px;
-  }
-}
+   .container { padding: 10px; margin: 5px; }
+   .terminal { padding: 10px; }
+   .input-field, .prompt { font-size: 14px; }
+ }
+ 
