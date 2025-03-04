@@ -20,7 +20,7 @@
 		"links": "Display links information.",
 		"clear": "Clear the terminal.",
 		"light": "Switch to light mode.",
-		"dark": "Switch to dark mode."
+		"dark": "Switch to dark mode.",
 	};
 	const commandKeys = Object.keys(availableCommands);
 	let commandHistory = [];
