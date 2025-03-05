@@ -87,9 +87,8 @@
 	function handleInputFocus(event) {
 		if (!isMobileDevice()) {
 			inputField.focus();
-		} else if (event && event.target !== inputField) {
-			event.preventDefault();
 		}
+		event.preventDefault();
 	}
 
 	function resetInputField() {
@@ -280,6 +279,12 @@
 		if (isMobileDevice()) {
 			event.preventDefault();
 			event.stopPropagation();
-		  }
+		}
+
+		// Scroll smoothly to the expanded section
+		setTimeout(() => {
+			details.scrollIntoView({ behavior: "smooth", block: "start" });
+		}, 100);
+
 	};	
 })();
