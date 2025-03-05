@@ -3,12 +3,16 @@
 /* ===================================================
    1. Font Import
 =================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi:wght@400&display=swap');
 
 /* ===================================================
-   2. General Styles
-   - Base layout, typography, and color scheme.
+   2. General Styles - Base layout, typography, and color scheme.
 =================================================== */
+:root {
+  --custom-cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="transparent" stroke="%2358a6ff" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>'), auto;
+  --custom-pointer:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%2358a6ff" stroke="%2358a6ff" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>'), auto;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -21,10 +25,17 @@ body {
   overflow: hidden;
   background: #0d1117;
   color: #c9d1d9;
-  font-family: 'Fira Code', monospace;
+  font-family: "Noto Sans Warang Citi", sans-serif;
   transition: background 0.3s, color 0.3s;
+  cursor: var(--custom-cursor);
 }
 
+/* Apply to Terminal and Input */
+.terminal, .input-field, .prompt {
+  font-family: "Fira Code", monospace;
+}
+
+/* Style Containers */
 .container {
   max-width: 800px;
   width: calc(100% - 10px);
@@ -33,6 +44,7 @@ body {
   border-radius: 10px;
   box-sizing: border-box;
 }
+
 
 /* ===================================================
    3. Terminal Styles
@@ -53,6 +65,15 @@ body {
 
 .prompt {
   color: #58a6ff;
+}
+
+.terminal::-webkit-scrollbar {
+  width: 4px;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #58a6ff;
+  border-radius: 6px;
 }
 
 /* ===================================================
@@ -80,7 +101,7 @@ body {
 
 .command-btn {
   color: #58a6ff;
-  cursor: pointer;
+  cursor: var(--custom-pointer);
   font-weight: bold;
   transition: color 0.2s ease-in-out;
 }
@@ -99,7 +120,6 @@ body {
   color: #333;
 }
 
-.light-mode .prompt,
 .light-mode a {
   color: #007bff;
 }
@@ -117,13 +137,12 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+a, .project-link, .research-link, .links-section a, .toggle {
+  cursor: var(--custom-pointer) !important;
 }
 
 .expandable {
   color: #58a6ff;
-  cursor: pointer;
 }
 
 .details {
@@ -132,8 +151,10 @@ a:hover {
   transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
-.toggle {
-  cursor: pointer;
+.project-link {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
 }
 
 /* ===================================================

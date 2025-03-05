@@ -256,9 +256,13 @@
 	}
 
 	window.toggleDetails = function(id, event) {
+		event.stopPropagation(); // Prevents interference from hyperlink clicks
+	
 		const details = document.getElementById(id);
-		const toggle = details.previousElementSibling;
-
+		const toggle = event.target.closest('.toggle'); // Ensure we're modifying the correct toggle button
+	
+		if (!toggle || !details) return; // Ensure elements exist to avoid errors
+	
 		if (details.style.display === "none" || details.style.display === "") {
 			details.style.display = "block";
 			toggle.textContent = "[-] ";
@@ -269,10 +273,12 @@
 			toggle.setAttribute("aria-expanded", "false");
 		}
 
+		const outputDiv = document.getElementById('terminal-output');
+  		outputDiv.scrollTop = outputDiv.scrollHeight;
+
 		if (isMobileDevice()) {
 			event.preventDefault();
 			event.stopPropagation();
-		}
-	};
-
+		  }
+	};	
 })();

@@ -17,19 +17,21 @@
 </head>
 <body onclick="maintainFocus()">
   <!-- ==================================================
-       Terminal Container & Content
+       Terminal Wrapper for Scrollbar Interaction
        ================================================== -->
-  <div class="container terminal">
-    <!-- Terminal Output Area -->
-    <div id="terminal-output"></div>
-    
-    <!-- Input Area for User Commands -->
-    <div class="input-line">
-      <span class="prompt">➜ ~ </span>
-      <span id="input-wrapper">
-        <span id="input-text">&nbsp;</span>
-      </span>
-      <input type="text" class="input-field" id="terminal-input" aria-label="Terminal input">
+  <div class="terminal-wrapper">
+    <div class="container terminal">
+      <!-- Terminal Output Area -->
+      <div id="terminal-output"></div>
+      
+      <!-- Input Area for User Commands -->
+      <div class="input-line">
+        <span class="prompt">➜ ~ </span>
+        <span id="input-wrapper">
+          <span id="input-text">&nbsp;</span>
+        </span>
+        <input type="text" class="input-field" id="terminal-input" aria-label="Terminal input">
+      </div>
     </div>
   </div>
 

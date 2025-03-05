@@ -18,15 +18,17 @@ function generateContent(data) {
 
 // Generates a list item with toggle functionality for details
 function generateListItem(key, value) {
-    const id = key.replace(/\s+/g, '');
+    const id = key.replace(/[^a-zA-Z0-9]/g, ''); // Ensure valid HTML ID
+    
     return `
         <li>
-        <span class="toggle" onclick="toggleDetails('${id}')" title="Click to expand/collapse details">[+] </span>${key}
-        <div id="${id}" class="details" style="display: none;">
-            <ul>
-            ${value.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        </div>
+            <span class="toggle" onclick="toggleDetails('${id}', event)">[+] </span>
+            ${key} <!-- This keeps hyperlinks intact -->
+            <div id="${id}" class="details" style="display: none;">
+                <ul>
+                    ${value.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            </div>
         </li>
     `;
 }
@@ -85,18 +87,27 @@ function getExperienceContent() {
 // Content for the "projects" command
 function getProjectsContent() {
     const projects = {
-        "LLM Grading Study": [
-        "Evaluated OpenAI and Ollama models for grading assessments.",
-        "Developed an automated scoring pipeline for evaluating Python scripts.",
-        "Conducted performance benchmarking on different LLM frameworks."
+        "<a href='https://github.com/christopherkumar/prompt_engineering_test' class='project-link' target='_blank'>LLM Grading Study</a>": [
+            "Evaluated OpenAI and Ollama models for grading assessments.",
+            "Developed an automated scoring pipeline for evaluating Python scripts.",
+            "Conducted performance benchmarking on different LLM frameworks."
         ],
-        "Retrieval-Augmented Generation (RAG)": [
-        "Implemented and tested RAG workflows to enhance AI-assisted retrieval.",
-        "Optimized document embedding techniques to improve response accuracy."
+        "<a href='https://github.com/christopherkumar/RAG-evaluation' class='project-link' target='_blank'>Retrieval-Augmented Generation (RAG)</a>": [
+            "Implemented and tested RAG workflows to enhance AI-assisted retrieval.",
+            "Optimized document embedding techniques to improve response accuracy."
         ],
-        "AUSLAN Letter Recognition": [
-        "Built a real-time hand-sign recognition system using OpenCV and TensorFlow.",
-        "Integrated machine learning for improved accuracy in AUSLAN letter recognition."
+        "<a href='https://github.com/christopherkumar/cv-terminalWebsite' class='project-link' target='_blank'>Interactive Terminal Resume</a>": [
+            "A web-based interactive resume designed to mimic a command-line terminal.",
+            "Features include a dark/light mode toggle, expandable sections, and smooth animations.",
+            "Provides an engaging way to showcase skills, experience, projects, and contact info.",
+            "Supports interactive commands such as 'skills', 'experience', 'projects', and more."
+        ],
+        "<a href='https://github.com/christopherkumar/simple-ollama-chatbot' class='project-link' target='_blank'>Chatbot with Contextual Memory and Vector Database</a>": [
+            "AI-powered chatbot that uses a vector database (ChromaDB) for contextual memory.",
+            "Implements conversation summarization after every 10 interactions for efficiency.",
+            "Stores conversations as embeddings using the mxbai-embed-large model.",
+            "Generates time-stamped log files for both full and summarized conversation history.",
+            "Built with Python, Ollama, and LangChain."
         ]
     };
     return generateContent(projects);
@@ -105,20 +116,20 @@ function getProjectsContent() {
 // Content for the "research" command
 function getResearchContent() {
     const research = {
-        "Effect of Camera Model and Camera Settings in Image Classification": [
-        "Investigated how camera hardware and settings impact machine learning image classification accuracy.",
-        "Developed a standardized image-capturing process to ensure consistent data collection.",
-        "Analyzed the effects of noise, white balance, exposure, and lens selection on classification outcomes."
+        "<a href='https://drive.google.com/file/d/1EebltMSemESHyryEF65LBV-ht4Ff9U0w/view?usp=sharing' class='project-link' target='_blank'>Effect of Camera Model and Camera Settings in Image Classification</a>": [
+            "Investigated how camera hardware and settings impact machine learning image classification accuracy.",
+            "Developed a standardized image-capturing process to ensure consistent data collection.",
+            "Analyzed the effects of noise, white balance, exposure, and lens selection on classification outcomes."
         ],
-        "A Comparative Study of the Grading Capabilities of Large Language Models": [
-        "Compared OpenAI (GPT-4, GPT-4 Turbo) with open-source models (Llama, Mistral) for automated grading.",
-        "Developed a framework using text-based and numeric rubrics to evaluate grading accuracy.",
-        "Identified GPT-4 Turbo as the most accurate for structured assessments, with potential improvements in hybrid rubrics."
+        "<a href='https://drive.google.com/file/d/1SM_kGf_Xn0rDWYnz6JT5i9v6w1HTkGaa/view?usp=sharing' class='project-link' target='_blank'>A Comparative Study of the Grading Capabilities of Large Language Models</a>": [
+            "Compared OpenAI (GPT-4, GPT-4 Turbo) with open-source models (Llama, Mistral) for automated grading.",
+            "Developed a framework using text-based and numeric rubrics to evaluate grading accuracy.",
+            "Identified GPT-4 Turbo as the most accurate for structured assessments, with potential improvements in hybrid rubrics."
         ],
-        "Evaluation of Retrieval-Augmented Generation (RAG) Systems": [
-        "Tested five different RAG implementations for retrieving and generating accurate responses.",
-        "Determined OpenAI's vector-based RAG as the most reliable, with 24/30 successful responses.",
-        "Assessed the limitations of open-source RAG models, identifying potential for future refinements."
+        "<a href='https://drive.google.com/file/d/1JAXUuQq4u81rpQDBn9JNBb98mEz8RrmO/view?usp=sharing' class='project-link' target='_blank'>Evaluation of Retrieval-Augmented Generation (RAG) Systems</a>": [
+            "Tested five different RAG implementations for retrieving and generating accurate responses.",
+            "Determined OpenAI's vector-based RAG as the most reliable, with 24/30 successful responses.",
+            "Assessed the limitations of open-source RAG models, identifying potential for future refinements."
         ]
     };
     return generateContent(research);
@@ -130,8 +141,10 @@ function getLinksContent() {
         <ul class="links-section">
         <li><a href="mailto:christopherkumar812@gmail.com">Email</a></li>
         <li><a href="https://www.linkedin.com/in/christopher-kumar/">LinkedIn</a></li>
+        <li><a href="https://drive.google.com/file/d/1dS-SfApwipPBnU6ICy0jSEu1XnfnVF2f/view?usp=sharing" target='_blank'>Resume</a></li>
         <li><a href="https://github.com/christopherkumar">GitHub</a></li>
         <li><a href="https://leetcode.com/u/cvkumar812">LeetCode</a></li>
+        
         </ul>
     `;
 }
