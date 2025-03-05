@@ -90,6 +90,7 @@ body {
   font-size: inherit;
   font-family: inherit;
   caret-color: #58a6ff !important;
+  cursor: var(--custom-cursor);
   opacity: 1 !important;
 }
 
