@@ -16,7 +16,7 @@ Type the following commands into the terminal for more information:
 - `experience` – Shows work history.
 - `projects` – Displays notable projects.
 - `research` – Highlights research topics.
-- `contact` – Provides email, LinkedIn, and GitHub links.
+- `links` – Provides email, LinkedIn, and GitHub links.
 - `clear` – Clears the terminal.
 - `light` / `dark` – Toggles between themes.
 
