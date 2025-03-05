@@ -30,6 +30,7 @@
 	const introText = `
 		<p class="prompt">➜ ~ whoami</p>
 		<p class="prompt">Christopher Kumar</p>
+		<p>📍 Australia</p>
 		<p>Engineer. Developer. Problem Solver.</p>
 		<p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>
 		<ul>
