@@ -162,13 +162,8 @@ a, .project-link, .research-link, .links-section a, .toggle {
    7. Animations and Effects
    - Animations used throughout the terminal.
 =================================================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .command-output {
-  animation: fadeIn 0.5s ease-in;
+  animation: none;
 }
 
 /* ===================================================
