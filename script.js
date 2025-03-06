@@ -256,12 +256,12 @@
 	}
 
 	window.toggleDetails = function(id, event) {
-		event.stopPropagation(); // Prevents interference from hyperlink clicks
+		event.stopPropagation();
 	
 		const details = document.getElementById(id);
-		const toggle = event.target.closest('.toggle'); // Ensure we're modifying the correct toggle button
+		const toggle = event.target.closest('.toggle');
 	
-		if (!toggle || !details) return; // Ensure elements exist to avoid errors
+		if (!toggle || !details) return;
 	
 		if (details.style.display === "none" || details.style.display === "") {
 			details.style.display = "block";
