@@ -157,29 +157,3 @@ a, .project-link, .research-link, .links-section a, .toggle {
   font-weight: normal;
   text-decoration: none;
 }
-
-/* ===================================================
-   7. Animations and Effects
-   - Animations used throughout the terminal.
-=================================================== */
-.command-output {
-  animation: none;
-}
-
-/* ===================================================
-   8. Responsive Design
-   - Adjustments for smaller screens.
-=================================================== */
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-    margin: 5px;
-  }
-  .terminal {
-    padding: 10px;
-  }
-  .input-field,
-  .prompt {
-    font-size: 14px;
-  }
-}
