@@ -47,11 +47,14 @@
 	// ======================================================
 	// 2. Initialization and Global Event Listeners
 	// ======================================================
+	
 	document.addEventListener("DOMContentLoaded", () => {
 		initializeInputField();
 		startTypingSequence();
 		handleInputFocus();
 	});
+
+	window.maintainFocus = handleInputFocus;
 
 	// Global keydown for shortcuts (e.g., Ctrl+L to clear terminal)
 	document.addEventListener("keydown", (event) => {
@@ -62,13 +65,14 @@
 	});
 
 	// Attach click event to command buttons
-	document.querySelectorAll(".command-btn").forEach((btn) => {
-		btn.addEventListener("click", (event) => {
+	document.addEventListener("click", (event) => {
+		const btn = event.target.closest(".command-btn");
+		if (btn) {
 			event.preventDefault();
 			event.stopPropagation();
-			executeCommandFromClick(btn.textContent.trim());
-		});
-	});
+			handleCommand(btn.textContent.trim());
+		}
+	});	
 
 	// Listen for keydown events on the input field
 	inputField.addEventListener("keydown", handleKeydownEvent);
@@ -125,7 +129,7 @@
 		if (command === "clear") return resetTerminalOutput();
 		if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
 		if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
-	
+
 		let responseElement = document.createElement("div");
 		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
 		responseElement.classList.add("command-output", "slide-down");
@@ -142,94 +146,82 @@
 		errorElement.classList.add("command-output");
 		errorElement.setAttribute("role", "alert");
 		outputDiv.appendChild(errorElement);
-		}
+	}
 
 	// ======================================================
 	// 5. Theme and UI Toggling Functions
 	// ======================================================
 	function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
-		const shouldHaveClass = !remove;
-		const isClassPresent = document.body.classList.contains(modeClass);
-
-		if (isClassPresent === shouldHaveClass) {
+		const isInMode = document.body.classList.contains(modeClass);
+	
+		if (isInMode === !remove) {
 			outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
 		} else {
-			if (shouldHaveClass) {
-			document.body.classList.add(modeClass);
-			} else {
-			document.body.classList.remove(modeClass);
-			}
+			document.body.classList.toggle(modeClass, !remove);
 			outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
 		}
 	}
-
+	
 	// ======================================================
 	// 6. Input Field Keydown Event Handler
 	// ======================================================
 	function handleKeydownEvent(event) {
 		switch (event.key) {
 			case "Enter":
-			const command = inputField.value.trim();
-			if (command) {
-				commandHistory.push(command);
-				historyIndex = commandHistory.length;
-			}
-			handleCommand(command);
-			resetInputField();
-			break;
+				const command = inputField.value.trim();
+				if (command) {
+					commandHistory.push(command);
+					historyIndex = commandHistory.length;
+				}
+				handleCommand(command);
+				resetInputField();
+				break;
 
 			case "ArrowUp":
-			if (commandHistory.length > 0 && historyIndex > 0) {
-				historyIndex--;
-				inputField.value = commandHistory[historyIndex];
-			}
-			event.preventDefault();
-			break;
+				if (commandHistory.length > 0 && historyIndex > 0) {
+					historyIndex--;
+					inputField.value = commandHistory[historyIndex];
+				}
+				event.preventDefault();
+				break;
 
 			case "ArrowDown":
-			if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
-				historyIndex++;
-				inputField.value = commandHistory[historyIndex];
-			} else {
-				historyIndex = commandHistory.length;
-				inputField.value = "";
-			}
-			event.preventDefault();
-			break;
+				if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+					historyIndex++;
+					inputField.value = commandHistory[historyIndex];
+				} else {
+					historyIndex = commandHistory.length;
+					inputField.value = "";
+				}
+				event.preventDefault();
+				break;
 
 			case "Tab":
-			const currentInput = inputField.value.trim();
-			// If input is empty OR already matches a full command, cycle through commands
-			if (currentInput === "" || commandKeys.includes(currentInput)) {
-				if (commandKeys.includes(currentInput)) {
-				const currentIndex = commandKeys.indexOf(currentInput);
-				tabCycleIndex = (currentIndex + 1) % commandKeys.length;
+				const currentInput = inputField.value.trim();
+				// If input is empty OR already matches a full command, cycle through commands
+				if (currentInput === "" || commandKeys.includes(currentInput)) {
+					if (commandKeys.includes(currentInput)) {
+					const currentIndex = commandKeys.indexOf(currentInput);
+					tabCycleIndex = (currentIndex + 1) % commandKeys.length;
+					}
+					inputField.value = commandKeys[tabCycleIndex];
+					tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
+				} else {
+					// Auto-complete based on the partial command
+					const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
+					if (match) {
+					inputField.value = match;
+					}
+					tabCycleIndex = 0;
 				}
-				inputField.value = commandKeys[tabCycleIndex];
-				tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
-			} else {
-				// Auto-complete based on the partial command
-				const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
-				if (match) {
-				inputField.value = match;
-				}
-				tabCycleIndex = 0;
-			}
-			event.preventDefault();
-			break;	
+				event.preventDefault();
+				break;	
 
 			default:
-			tabCycleIndex = 0;
+				tabCycleIndex = 0;
 			break;
 		}
 	}
-
-	// Expose command button click handler globally
-	window.executeCommandFromClick = function(command) {
-		handleCommand(command);
-		commandHistory.push(command);
-        historyIndex = commandHistory.length;
-	};
 
 	// ======================================================
 	// 7. Typing Sequence and Additional UI Functions
@@ -250,18 +242,18 @@
 	
 		if (details.classList.contains("expanded")) {
 			// Collapse with smooth animation
-			details.style.maxHeight = details.scrollHeight + "px"; // Set to current height
+			details.style.maxHeight = details.scrollHeight + "px";
 			setTimeout(() => {
-				details.style.maxHeight = "0px"; // Shrink to zero
+				details.style.maxHeight = "0px";
 				details.style.opacity = "0";
 			}, 10);
 			toggle.textContent = "[+] ";
 			details.classList.remove("expanded");
 		} else {
 			// Expand with smooth animation
-			details.style.display = "block"; // Ensure it's visible
+			details.style.display = "block";
 			details.style.opacity = "1";
-			details.style.maxHeight = details.scrollHeight + "px"; // Expand dynamically
+			details.style.maxHeight = details.scrollHeight + "px";
 			toggle.textContent = "[-] ";
 			details.classList.add("expanded");
 		}
