@@ -160,10 +160,13 @@
 	function displayUnknownCommand(command) {
 		let errorElement = document.createElement("div");
 		errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
-		errorElement.classList.add("command-output");
+		errorElement.classList.add("command-output", "slide-down");
 		errorElement.setAttribute("role", "alert");
 		outputDiv.appendChild(errorElement);
-		}
+		setTimeout(() => errorElement.classList.add("show"), 10);
+		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+	}
+	  
 
 	function clearTerminal() {
 		resetTerminalOutput();
