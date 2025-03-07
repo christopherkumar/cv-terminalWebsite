@@ -47,14 +47,15 @@
 	// ======================================================
 	// 2. Initialization and Global Event Listeners
 	// ======================================================
-	
+	window.maintainFocus = handleInputFocus;
+
 	document.addEventListener("DOMContentLoaded", () => {
 		initializeInputField();
 		startTypingSequence();
 		handleInputFocus();
 	});
 
-	window.maintainFocus = handleInputFocus;
+	// window.maintainFocus = handleInputFocus;
 
 	// Global keydown for shortcuts (e.g., Ctrl+L to clear terminal)
 	document.addEventListener("keydown", (event) => {
@@ -72,7 +73,7 @@
 			event.stopPropagation();
 			handleCommand(btn.textContent.trim());
 		}
-	});	
+	});
 
 	// Listen for keydown events on the input field
 	inputField.addEventListener("keydown", handleKeydownEvent);
@@ -222,6 +223,12 @@
 			break;
 		}
 	}
+
+	window.executeCommandFromClick = function(command) {
+		handleCommand(command);
+		commandHistory.push(command);
+        historyIndex = commandHistory.length;
+	};
 
 	// ======================================================
 	// 7. Typing Sequence and Additional UI Functions
