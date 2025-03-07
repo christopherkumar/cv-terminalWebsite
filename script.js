@@ -99,6 +99,7 @@
 	function resetTerminalOutput() {
 		outputDiv.innerHTML = introText;
 	}
+	
 	function isMobileDevice() {
 		return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 	}
