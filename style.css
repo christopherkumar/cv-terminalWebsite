@@ -1,18 +1,15 @@
 /* style.css - Interactive Resume Terminal Styles */
-
 /* ===================================================
    1. Font Import
 =================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi:wght@400&display=swap');
-
 /* ===================================================
    2. General Styles - Base layout, typography, and color scheme.
 =================================================== */
 :root {
   --custom-cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="transparent" stroke="%2358a6ff" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>'), auto;
-  --custom-pointer:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%2358a6ff" stroke="%2358a6ff" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>'), auto;
+  --custom-pointer: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%2358a6ff" stroke="%2358a6ff" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>'), auto;
 }
-
 body {
   display: flex;
   flex-direction: column;
@@ -29,12 +26,10 @@ body {
   transition: background 0.3s, color 0.3s;
   cursor: var(--custom-cursor);
 }
-
 /* Apply to Terminal and Input */
 .terminal, .input-field, .prompt {
   font-family: "Fira Code", monospace;
 }
-
 /* Style Containers */
 .container {
   max-width: 800px;
@@ -44,8 +39,6 @@ body {
   border-radius: 10px;
   box-sizing: border-box;
 }
-
-
 /* ===================================================
    3. Terminal Styles
    - Main terminal interface styling.
@@ -62,20 +55,16 @@ body {
   transition: background 0.3s, color 0.3s;
   box-sizing: border-box;
 }
-
 .prompt {
   color: #58a6ff;
 }
-
 .terminal::-webkit-scrollbar {
   width: 4px;
 }
-
 .terminal::-webkit-scrollbar-thumb {
   background: #58a6ff;
   border-radius: 6px;
 }
-
 /* ===================================================
    4. Input and Command Button Styles
    - Styles for input fields and command buttons.
@@ -93,20 +82,17 @@ body {
   cursor: var(--custom-cursor);
   opacity: 1 !important;
 }
-
 .input-line {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 .command-btn {
   color: #58a6ff;
   cursor: var(--custom-pointer);
   font-weight: bold;
   transition: color 0.2s ease-in-out;
 }
-
 /* ===================================================
    5. Light Mode Styles
    - Alternate color scheme for light mode.
@@ -115,20 +101,16 @@ body {
   background: #dcdcdc;
   color: #333;
 }
-
 .light-mode .terminal {
   background: #f5f5f5;
   color: #333;
 }
-
 .light-mode a {
   color: #007bff;
 }
-
 .light-mode a:hover {
   color: #0056b3;
 }
-
 /* ===================================================
    6. Links and Expandable Sections
    - Styles for hyperlinks and collapsible content.
@@ -137,11 +119,9 @@ a {
   color: #58a6ff;
   text-decoration: none;
 }
-
 a, .project-link, .research-link, .links-section a, .toggle {
   cursor: var(--custom-pointer) !important;
 }
-
 .expandable {
   color: #58a6ff;
 }
@@ -153,7 +133,6 @@ a, .project-link, .research-link, .links-section a, .toggle {
   font-weight: normal;
   text-decoration: none;
 }
-
 /* ===================================================
    7. Responsive Design
    - Adjustments for smaller screens.
@@ -171,7 +150,6 @@ a, .project-link, .research-link, .links-section a, .toggle {
     font-size: 14px;
   }
 }
-
 /* ===================================================
    8. Animations and Effects
    - Animations used throughout the terminal.
@@ -186,14 +164,12 @@ a, .project-link, .research-link, .links-section a, .toggle {
   transform: scaleY(1);
   opacity: 1;
 }
-
 .details {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
-
 .details.expanded {
   opacity: 1;
 }
