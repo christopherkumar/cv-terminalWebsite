@@ -17,7 +17,7 @@
 		"experience": "Display work experience.",
 		"projects": "Display projects.",
 		"research": "Display research.",
-		"links": "Display links information.",
+		"contact": "Display contact information.",
 		"clear": "Clear the terminal.",
 		"light": "Switch to light mode.",
 		"dark": "Switch to dark mode.",

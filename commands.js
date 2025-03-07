@@ -1,7 +1,7 @@
 /*
  * commands.js
  * This script defines the available commands and their corresponding content for the interactive resume terminal.
- * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and links information.
+ * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and contact information.
  */
 
 // ======================================================
@@ -135,15 +135,15 @@ function getResearchContent() {
     return generateContent(research);
 }
 
-// Content for the "links" command
-function getLinksContent() {
+// Content for the "contact" command
+function getContactContent() {
     return `
-        <ul class="links-section">
-        <li><a href="mailto:christopherkumar812@gmail.com">Email</a></li>
-        <li><a href="https://www.linkedin.com/in/christopher-kumar/">LinkedIn</a></li>
+        <ul class="contact-section">
+        <li><a href="mailto:christopherkumar812@gmail.com" target='_blank'>Email</a></li>
+        <li><a href="https://www.linkedin.com/in/christopher-kumar/" target='_blank'>LinkedIn</a></li>
         <li><a href="https://drive.google.com/file/d/1dS-SfApwipPBnU6ICy0jSEu1XnfnVF2f/view?usp=sharing" target='_blank'>Resume</a></li>
-        <li><a href="https://github.com/christopherkumar">GitHub</a></li>
-        <li><a href="https://leetcode.com/u/cvkumar812">LeetCode</a></li>
+        <li><a href="https://github.com/christopherkumar" target='_blank'>GitHub</a></li>
+        <li><a href="https://leetcode.com/u/cvkumar812" target='_blank'>LeetCode</a></li>
         
         </ul>
     `;
@@ -157,5 +157,5 @@ window.commands = {
     "experience": getExperienceContent(),
     "projects": getProjectsContent(),
     "research": getResearchContent(),
-    "links": getLinksContent(),
+    "contact": getContactContent(),
 };
