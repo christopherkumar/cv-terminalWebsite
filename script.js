@@ -60,7 +60,7 @@
 	document.addEventListener("keydown", (event) => {
 		if (event.ctrlKey && event.key.toLowerCase() === "l") {
 			event.preventDefault();
-			clearTerminal();
+			resetTerminalOutput();
 		}
 	});
 
@@ -130,7 +130,7 @@
 	}
 
 	function executeCommand(command) {
-		if (command === "clear") return clearTerminal();
+		if (command === "clear") return resetTerminalOutput();
 		if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
 		if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
 
@@ -165,11 +165,6 @@
 		outputDiv.appendChild(errorElement);
 		setTimeout(() => errorElement.classList.add("show"), 10);
 		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
-	}
-	  
-
-	function clearTerminal() {
-		resetTerminalOutput();
 	}
 
 	// ======================================================
