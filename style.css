@@ -30,12 +30,10 @@ body {
   cursor: var(--custom-cursor);
 }
 
-/* Apply to Terminal and Input */
 .terminal, .input-field, .prompt {
   font-family: "Fira Code", monospace;
 }
 
-/* Style Containers */
 .container {
   max-width: 800px;
   width: calc(100% - 10px);
@@ -147,6 +145,28 @@ a, .project-link, .research-link, .links-section a, .toggle {
   color: #58a6ff;
 }
 
+.project-link {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.command-output {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* ===================================================
+   7. Rolldown Styles
+   - Styles for commands and collapsible content.
+=================================================== */
+.command-output.show {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
 .details {
   overflow: hidden;
   max-height: 0;
@@ -156,24 +176,4 @@ a, .project-link, .research-link, .links-section a, .toggle {
 
 .details.expanded {
   opacity: 1;
-}
-
-.project-link {
-  color: inherit;
-  font-weight: normal;
-  text-decoration: none;
-}
-
-/* Initial state: collapsed with no extra space */
-.command-output {
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-/* Expanded state: smoothly reveals output */
-.command-output.show {
-  opacity: 1;
-  transform: scaleY(1);
 }
