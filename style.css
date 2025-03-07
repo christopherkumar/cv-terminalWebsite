@@ -140,6 +140,7 @@ a {
 
 a, .project-link, .research-link, .links-section a, .toggle {
   cursor: var(--custom-pointer) !important;
+  color: #58a6ff;
 }
 
 .expandable {
@@ -156,4 +157,18 @@ a, .project-link, .research-link, .links-section a, .toggle {
   color: inherit;
   font-weight: normal;
   text-decoration: none;
+}
+
+/* Initial state: collapsed with no extra space */
+.command-output {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Expanded state: smoothly reveals output */
+.command-output.show {
+  opacity: 1;
+  transform: scaleY(1);
 }

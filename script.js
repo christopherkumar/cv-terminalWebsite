@@ -17,7 +17,7 @@
 		"experience": "Display work experience.",
 		"projects": "Display projects.",
 		"research": "Display research.",
-		"links": "Display links information.",
+		"contact": "Display contact information.",
 		"clear": "Clear the terminal.",
 		"light": "Switch to light mode.",
 		"dark": "Switch to dark mode.",
@@ -99,10 +99,6 @@
 	function resetTerminalOutput() {
 		outputDiv.innerHTML = introText;
 	}
-  
-	function scrollToBottom() {
-		outputDiv.scrollTop = outputDiv.scrollHeight;
-	}
 
 	function isMobileDevice() {
 		return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -126,7 +122,6 @@
 		} else {
 			displayUnknownCommand(command);
 		}
-		scrollToBottom();
 	}
 
 	function executeCommand(command) {
@@ -144,11 +139,20 @@
 	function processCommandResponse(command) {
 		let responseElement = document.createElement("div");
 		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
-		responseElement.classList.add("command-output");
+		responseElement.classList.add("command-output", "slide-down");
 		responseElement.setAttribute("role", "status");
+	
 		outputDiv.appendChild(responseElement);
+	
+		// Trigger animation after a slight delay to ensure rendering
+		setTimeout(() => {
+			responseElement.classList.add("show");
+		}, 10);
+	
+		// Scroll to the bottom smoothly
+		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 	}
-
+	
 	function displayUnknownCommand(command) {
 		let errorElement = document.createElement("div");
 		errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
@@ -280,11 +284,5 @@
 			event.preventDefault();
 			event.stopPropagation();
 		}
-
-		// Scroll smoothly to the expanded section
-		setTimeout(() => {
-			details.scrollIntoView({ behavior: "smooth", block: "start" });
-		}, 100);
-
 	};	
 })();
