@@ -30,10 +30,12 @@ body {
   cursor: var(--custom-cursor);
 }
 
+/* Apply to Terminal and Input */
 .terminal, .input-field, .prompt {
   font-family: "Fira Code", monospace;
 }
 
+/* Style Containers */
 .container {
   max-width: 800px;
   width: calc(100% - 10px);
@@ -138,7 +140,6 @@ a {
 
 a, .project-link, .research-link, .links-section a, .toggle {
   cursor: var(--custom-pointer) !important;
-  color: #58a6ff;
 }
 
 .expandable {
@@ -151,20 +152,38 @@ a, .project-link, .research-link, .links-section a, .toggle {
   text-decoration: none;
 }
 
-.command-output {
-  opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+/* ===================================================
+   7. Responsive Design
+   - Adjustments for smaller screens.
+=================================================== */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+    margin: 5px;
+  }
+  .terminal {
+    padding: 10px;
+  }
+  .input-field,
+  .prompt {
+    font-size: 14px;
+  }
 }
 
 /* ===================================================
-   7. Rolldown Styles
-   - Styles for commands and collapsible content.
+   8. Animations and Effects
+   - Animations used throughout the terminal.
 =================================================== */
+.command-output {
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
 .command-output.show {
-  opacity: 1;
   transform: scaleY(1);
+  opacity: 1;
 }
 
 .details {
