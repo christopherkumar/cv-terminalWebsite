@@ -53,14 +53,11 @@
 		handleInputFocus();
 	});
 
-	// Reassign maintainFocus to the helper function
-	window.maintainFocus = handleInputFocus;
-
 	// Global keydown for shortcuts (e.g., Ctrl+L to clear terminal)
 	document.addEventListener("keydown", (event) => {
 		if (event.ctrlKey && event.key.toLowerCase() === "l") {
 			event.preventDefault();
-			clearTerminal();
+			resetTerminalOutput();
 		}
 	});
 
@@ -125,31 +122,17 @@
 	}
 
 	function executeCommand(command) {
-		if (command === "clear") return clearTerminal();
+		if (command === "clear") return resetTerminalOutput();
 		if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
 		if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
-
-		displayCommandResponse(command);
-	}
-
-	function displayCommandResponse(command) {
-		processCommandResponse(command);
-	}
-
-	function processCommandResponse(command) {
+	
 		let responseElement = document.createElement("div");
 		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
 		responseElement.classList.add("command-output", "slide-down");
 		responseElement.setAttribute("role", "status");
 	
 		outputDiv.appendChild(responseElement);
-	
-		// Trigger animation after a slight delay to ensure rendering
-		setTimeout(() => {
-			responseElement.classList.add("show");
-		}, 10);
-	
-		// Scroll to the bottom smoothly
+		setTimeout(() => responseElement.classList.add("show"), 10);
 		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 	}
 	
@@ -160,10 +143,6 @@
 		errorElement.setAttribute("role", "alert");
 		outputDiv.appendChild(errorElement);
 		}
-
-	function clearTerminal() {
-		resetTerminalOutput();
-	}
 
 	// ======================================================
 	// 5. Theme and UI Toggling Functions
@@ -237,7 +216,7 @@
 				tabCycleIndex = 0;
 			}
 			event.preventDefault();
-			break;
+			break;	
 
 			default:
 			tabCycleIndex = 0;
@@ -248,6 +227,8 @@
 	// Expose command button click handler globally
 	window.executeCommandFromClick = function(command) {
 		handleCommand(command);
+		commandHistory.push(command);
+        historyIndex = commandHistory.length;
 	};
 
 	// ======================================================
