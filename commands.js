@@ -140,7 +140,7 @@ function getResearchContent() {
 }
 
 // Content for the "contact" command
-function getLinksContent() {
+function getContactContent() {
     const contact = {
         "<a href='mailto:christopherkumar812@gmail.com'>Email</a>": [],
         "<a href='https://www.linkedin.com/in/christopher-kumar/' target='_blank'>LinkedIn</a>": [],
@@ -159,5 +159,5 @@ window.commands = {
     "experience": getExperienceContent(),
     "projects": getProjectsContent(),
     "research": getResearchContent(),
-    "contact": getLinksContent(),
+    "contact": getContactContent(),
 };

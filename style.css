@@ -148,9 +148,14 @@ a, .project-link, .research-link, .links-section a, .toggle {
 }
 
 .details {
-  display: none;
-  margin-left: 20px;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.details.expanded {
+  opacity: 1;
 }
 
 .project-link {

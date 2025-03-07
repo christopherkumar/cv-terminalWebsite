@@ -259,27 +259,36 @@
 		outputDiv.innerHTML = introText;
 	}
 
-	window.toggleDetails = function(id, event) {
+	window.toggleDetails = function (id, event) {
 		event.stopPropagation();
 	
 		const details = document.getElementById(id);
-		const toggle = event.target.closest('.toggle');
+		const toggle = event.target.closest(".toggle");
 	
 		if (!toggle || !details) return;
 	
-		if (details.style.display === "none" || details.style.display === "") {
-			details.style.display = "block";
-			toggle.textContent = "[-] ";
-			toggle.setAttribute("aria-expanded", "true");
-		} else {
-			details.style.display = "none";
+		if (details.classList.contains("expanded")) {
+			// Collapse with smooth animation
+			details.style.maxHeight = details.scrollHeight + "px"; // Set to current height
+			setTimeout(() => {
+				details.style.maxHeight = "0px"; // Shrink to zero
+				details.style.opacity = "0";
+			}, 10);
 			toggle.textContent = "[+] ";
-			toggle.setAttribute("aria-expanded", "false");
+			details.classList.remove("expanded");
+		} else {
+			// Expand with smooth animation
+			details.style.display = "block"; // Ensure it's visible
+			details.style.opacity = "1";
+			details.style.maxHeight = details.scrollHeight + "px"; // Expand dynamically
+			toggle.textContent = "[-] ";
+			details.classList.add("expanded");
 		}
-
-		const outputDiv = document.getElementById('terminal-output');
-  		outputDiv.scrollTop = outputDiv.scrollHeight;
-
+	
+		// Ensure smooth scrolling
+		const outputDiv = document.getElementById("terminal-output");
+		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+	
 		if (isMobileDevice()) {
 			event.preventDefault();
 			event.stopPropagation();
