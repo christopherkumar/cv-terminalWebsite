@@ -99,11 +99,6 @@
 	function resetTerminalOutput() {
 		outputDiv.innerHTML = introText;
 	}
-  
-	function scrollToBottom() {
-		outputDiv.scrollTop = outputDiv.scrollHeight;
-	}
-
 	function isMobileDevice() {
 		return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 	}
@@ -126,7 +121,6 @@
 		} else {
 			displayUnknownCommand(command);
 		}
-		scrollToBottom();
 	}
 
 	function executeCommand(command) {
@@ -178,9 +172,9 @@
 			outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
 		} else {
 			if (shouldHaveClass) {
-			document.body.classList.add(modeClass);
+				document.body.classList.add(modeClass);
 			} else {
-			document.body.classList.remove(modeClass);
+				document.body.classList.remove(modeClass);
 			}
 			outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
 		}
@@ -192,57 +186,57 @@
 	function handleKeydownEvent(event) {
 		switch (event.key) {
 			case "Enter":
-			const command = inputField.value.trim();
-			if (command) {
-				commandHistory.push(command);
-				historyIndex = commandHistory.length;
-			}
-			handleCommand(command);
-			resetInputField();
-			break;
+				const command = inputField.value.trim();
+				if (command) {
+					commandHistory.push(command);
+					historyIndex = commandHistory.length;
+				}
+				handleCommand(command);
+				resetInputField();
+				break;
 
 			case "ArrowUp":
-			if (commandHistory.length > 0 && historyIndex > 0) {
-				historyIndex--;
-				inputField.value = commandHistory[historyIndex];
-			}
-			event.preventDefault();
-			break;
+				if (commandHistory.length > 0 && historyIndex > 0) {
+					historyIndex--;
+					inputField.value = commandHistory[historyIndex];
+				}
+				event.preventDefault();
+				break;
 
 			case "ArrowDown":
-			if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
-				historyIndex++;
-				inputField.value = commandHistory[historyIndex];
-			} else {
-				historyIndex = commandHistory.length;
-				inputField.value = "";
-			}
-			event.preventDefault();
-			break;
+				if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+					historyIndex++;
+					inputField.value = commandHistory[historyIndex];
+				} else {
+					historyIndex = commandHistory.length;
+					inputField.value = "";
+				}
+				event.preventDefault();
+				break;
 
 			case "Tab":
-			const currentInput = inputField.value.trim();
-			// If input is empty OR already matches a full command, cycle through commands
-			if (currentInput === "" || commandKeys.includes(currentInput)) {
-				if (commandKeys.includes(currentInput)) {
-				const currentIndex = commandKeys.indexOf(currentInput);
-				tabCycleIndex = (currentIndex + 1) % commandKeys.length;
+				const currentInput = inputField.value.trim();
+				// If input is empty OR already matches a full command, cycle through commands
+				if (currentInput === "" || commandKeys.includes(currentInput)) {
+					if (commandKeys.includes(currentInput)) {
+					const currentIndex = commandKeys.indexOf(currentInput);
+					tabCycleIndex = (currentIndex + 1) % commandKeys.length;
+					}
+					inputField.value = commandKeys[tabCycleIndex];
+					tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
+				} else {
+					// Auto-complete based on the partial command
+					const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
+					if (match) {
+					inputField.value = match;
+					}
+					tabCycleIndex = 0;
 				}
-				inputField.value = commandKeys[tabCycleIndex];
-				tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
-			} else {
-				// Auto-complete based on the partial command
-				const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
-				if (match) {
-				inputField.value = match;
-				}
-				tabCycleIndex = 0;
-			}
-			event.preventDefault();
-			break;
+				event.preventDefault();
+				break;
 
 			default:
-			tabCycleIndex = 0;
+				tabCycleIndex = 0;
 			break;
 		}
 	}
@@ -252,8 +246,8 @@
 		handleCommand(command);
 		commandHistory.push(command);
 		historyIndex = commandHistory.length;
-	  };
-	  
+	};
+
 	// ======================================================
 	// 7. Typing Sequence and Additional UI Functions
 	// ======================================================
@@ -270,27 +264,26 @@
 		const toggle = event.target.closest(".toggle");
 		if (!toggle || !details) return;
 		if (details.classList.contains("expanded")) {
-		// Collapse with smooth animation
-		details.style.maxHeight = details.scrollHeight + "px";
-		setTimeout(() => {
-			details.style.maxHeight = "0px";
-			details.style.opacity = "0";
-		}, 10);
-		toggle.textContent = "[+] ";
-		details.classList.remove("expanded");
+			// Collapse with smooth animation
+			details.style.maxHeight = details.scrollHeight + "px";
+			setTimeout(() => {
+				details.style.maxHeight = "0px";
+				details.style.opacity = "0";
+			}, 10);
+			toggle.textContent = "[+] ";
+			details.classList.remove("expanded");
 		} else {
-		// Expand with smooth animation
-		details.style.display = "block";
-		details.style.opacity = "1";
-		details.style.maxHeight = details.scrollHeight + "px";
-		toggle.textContent = "[-] ";
-		details.classList.add("expanded");
+			// Expand with smooth animation
+			details.style.display = "block";
+			details.style.opacity = "1";
+			details.style.maxHeight = details.scrollHeight + "px";
+			toggle.textContent = "[-] ";
+			details.classList.add("expanded");
 		}
 		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 		if (isMobileDevice()) {
-		event.preventDefault();
-		event.stopPropagation();
+			event.preventDefault();
+			event.stopPropagation();
 		}
 	};
-  
 })();
