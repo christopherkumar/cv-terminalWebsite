@@ -20,11 +20,11 @@ Type the following commands into the terminal for more information:
 - `clear` – Clears the terminal.
 - `light` / `dark` – Toggles between themes.
 
-## 🛠️ Built With
+## Built With
 - **HTML** – Structure  
 - **CSS** – Styling & animations  
 - **JavaScript** – Interactive functionality  
 
-### 🎯 Purpose
+### Purpose
 This project is a creative approach to presenting a resume interactively, making it both functional and visually appealing.
 
