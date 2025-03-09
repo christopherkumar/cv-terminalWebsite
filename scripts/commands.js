@@ -1,13 +1,7 @@
-/*
- * commands.js
- * This script defines the available commands and their corresponding content for the interactive resume terminal.
- * It dynamically generates and returns formatted HTML content for sections such as skills, experience, projects, research, and contact information.
- */
+// commands.js
+// Defines the available commands and their corresponding content
 
-// ======================================================
-// 1. Helper Functions for Generating HTML Content
-// ======================================================
-// Generates HTML from a structured data object
+// Generates HTML from a structured data object.
 function generateContent(data) {
     return `
         <ul>
@@ -16,9 +10,9 @@ function generateContent(data) {
     `;
 }
 
-// Generates a list item with toggle functionality for details
+// Creates a list item with an expandable details section.
 function generateListItem(key, value) {
-    const id = key.replace(/[^a-zA-Z0-9]/g, ''); // Ensure valid HTML ID
+    const id = key.replace(/[^a-zA-Z0-9]/g, '');
     
     return `
         <li>
@@ -33,10 +27,7 @@ function generateListItem(key, value) {
     `;
 }
 
-// ======================================================
-// 2. Command-Specific Content Functions
-// ======================================================
-// Content for the "skills" command
+// Returns formatted content for the "skills" command.
 function getSkillsContent() {
     const skills = {
         "Programming Languages": [
@@ -64,7 +55,7 @@ function getSkillsContent() {
     return generateContent(skills);
 }
 
-// Content for the "experience" command
+// Returns formatted content for the "experience" command.
 function getExperienceContent() {
     const experience = {
         "AI/LLM Engineering Intern (2024)": [
@@ -84,7 +75,7 @@ function getExperienceContent() {
     return generateContent(experience);
 }
 
-// Content for the "projects" command
+// Returns formatted content for the "projects" command.
 function getProjectsContent() {
     const projects = {
         "<a href='https://github.com/christopherkumar/prompt_engineering_test' class='project-link' target='_blank'>LLM Grading Study</a>": [
@@ -113,7 +104,7 @@ function getProjectsContent() {
     return generateContent(projects);
 }
 
-// Content for the "research" command
+// Returns formatted content for the "research" command.
 function getResearchContent() {
     const research = {
         "<a href='https://drive.google.com/file/d/1EebltMSemESHyryEF65LBV-ht4Ff9U0w/view?usp=sharing' class='project-link' target='_blank'>Effect of Camera Model and Camera Settings in Image Classification</a>": [
@@ -135,7 +126,7 @@ function getResearchContent() {
     return generateContent(research);
 }
 
-// Content for the "contact" command
+// Returns formatted content for the "contact" command.
 function getContactContent() {
     return `
         <ul class="contact-section">
@@ -149,9 +140,7 @@ function getContactContent() {
     `;
 }
 
-// ======================================================
-// 3. Expose Commands to the Global Scope
-// ======================================================
+// Exposes the command outputs globally
 window.commands = {
     "skills": getSkillsContent(),
     "experience": getExperienceContent(),

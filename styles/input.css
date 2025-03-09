@@ -1,8 +1,5 @@
-/* ===================================================
-    *input.css
-    Input and Command Button Styles
-    Defines appearance and behavior of input fields and command buttons.
-=================================================== */
+/* input.css */
+/* Styles input fields and command buttons in the terminal */
 
 /* Input field - Terminal text entry */
 .input-field { 

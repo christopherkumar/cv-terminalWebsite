@@ -3,6 +3,7 @@
 
 import { outputDiv, introText } from "./constants.js";
 
+// Ensures the input field remains focused.
 export function handleInputFocus(event) {
     if (!isMobileDevice()) {
         document.getElementById("terminal-input").focus();
@@ -10,10 +11,12 @@ export function handleInputFocus(event) {
     if (event) event.preventDefault();
 }
 
+// Detects if the user is on a mobile device.
 export function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 }
 
+// Toggles between light and dark modes.
 export function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
     const shouldHaveClass = !remove;
     const isClassPresent = document.body.classList.contains(modeClass);
@@ -30,6 +33,7 @@ export function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = 
     }
 }
 
+// Expands and collapses sections in command outputs.
 export function toggleDetails(id, event) {
     event.stopPropagation();
     const details = document.getElementById(id);

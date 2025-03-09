@@ -3,8 +3,9 @@
 
 import { outputDiv, commandKeys, introText } from "./constants.js";
 import { toggleMode } from "./utils.js";
-import "./commands.js"; // Ensures commands are globally available
+import "./commands.js";
 
+// Handles command execution and output rendering.
 export function handleCommand(command) {
     if (!command.trim()) return;
     command = command.toLowerCase();
@@ -22,12 +23,14 @@ export function handleCommand(command) {
     }
 }
 
+// Allows commands to be executed when clicked.
 export function executeCommandFromClick(command) {
     handleCommand(command);
     commandHistory.push(command);
     historyIndex = commandHistory.length;
 }
 
+// Executes a command and performs the appropriate action.
 function executeCommand(command) {
     if (command === "clear") return resetTerminalOutput();
     if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
@@ -36,6 +39,7 @@ function executeCommand(command) {
     displayCommandResponse(command);
 }
 
+// Displays the output of a valid command.
 function displayCommandResponse(command) {
     let responseElement = document.createElement("div");
     responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
@@ -47,6 +51,7 @@ function displayCommandResponse(command) {
     outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 }
 
+// Handles unknown commands by displaying an error message.
 function displayUnknownCommand(command) {
     let errorElement = document.createElement("div");
     errorElement.innerHTML = `<p class="prompt">Command \"${command}\" not found.</p>`;
@@ -58,6 +63,7 @@ function displayUnknownCommand(command) {
     outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 }
 
+// Clears the terminal and resets it to the intro text.
 export function resetTerminalOutput() {
     outputDiv.innerHTML = introText;
 }

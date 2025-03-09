@@ -1,8 +1,5 @@
-/* ===================================================
-    * base.css
-    Base Styles - Global Layout, Typography, and Theme
-    Defines the foundation for the terminal interface.
-=================================================== */
+/* base.css */
+/* Defines global layout, typography, and theming for the terminal interface */
 
 /* Import primary font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Warang+Citi:wght@400&display=swap');

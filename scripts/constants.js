@@ -1,10 +1,12 @@
 // constants.js
 // Holds global constants for the terminal application
 
+// References to key DOM elements.
 export const inputField = document.getElementById("terminal-input");
 export const inputText = document.getElementById("input-text");
 export const outputDiv = document.getElementById("terminal-output");
 
+// 	Stores all available commands and descriptions.
 export const availableCommands = {
     "skills": "Display skills.",
     "experience": "Display work experience.",
@@ -16,11 +18,15 @@ export const availableCommands = {
     "dark": "Switch to dark mode."
 };
 
+// Extracts command names from availableCommands.
 export const commandKeys = Object.keys(availableCommands);
+
+//Manages command history and navigation.
 export let commandHistory = [];
 export let historyIndex = -1;
 export let tabCycleIndex = 0;
 
+// Defines the intro text displayed in the terminal.
 export const introText = `
     <p class="prompt">➜ ~ whoami</p>
     <p class="prompt">Christopher Kumar</p>

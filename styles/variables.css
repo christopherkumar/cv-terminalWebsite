@@ -1,8 +1,5 @@
-/* ===================================================
-    *variables.css
-    Global Variables - Colors, Fonts, and Cursors
-    Defines reusable variables for consistent theming.
-=================================================== */
+/* variables.css */
+/* Declares global CSS variables for colors, fonts, and cursors */
 
 :root { 
     /* Color Palette */

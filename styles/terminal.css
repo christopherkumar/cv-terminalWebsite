@@ -1,8 +1,5 @@
-/* ===================================================
-    *terminal.css
-    Terminal Styles - Main Interface
-    Defines appearance, layout, and scroll behavior of the terminal.
-=================================================== */
+/* terminal.css */
+/* Styles the main terminal interface, including layout and scroll behavior */
 
 /* Terminal container - Main terminal interface */
 .terminal { 

@@ -7,6 +7,7 @@ import { handleCommand } from "./commandHandler.js";
 let historyIndex = commandHistory.length;
 let tabCycleIndex = 0;
 
+// Handles keyboard interactions (Enter, Arrow keys, Tab).
 export function handleKeydownEvent(event) {
     switch (event.key) {
         case "Enter":
@@ -49,10 +50,12 @@ export function handleKeydownEvent(event) {
     }
 }
 
+// Clears the input field after executing a command.
 function resetInputField() {
     inputField.value = "";
 }
 
+// Implements command auto-completion.
 function autoCompleteCommand() {
     const currentInput = inputField.value.trim();
     if (!currentInput || commandKeys.includes(currentInput)) {
