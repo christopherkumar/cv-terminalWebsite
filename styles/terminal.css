@@ -16,7 +16,10 @@
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
-    transition: background 
+    transition: background ;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Prompt text - Command line appearance */

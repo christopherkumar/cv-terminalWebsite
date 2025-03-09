@@ -11,6 +11,11 @@ export function initializeTerminal() {
         initializeInputField();
         startTypingSequence();
         handleInputFocus();
+
+        // Show terminal once initialized
+        const terminal = document.querySelector(".terminal");
+        terminal.style.visibility = "visible";
+        terminal.style.opacity = "1";
     });
 
     // Maintain focus on the input field
