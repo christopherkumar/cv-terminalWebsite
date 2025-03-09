@@ -1,0 +1,25 @@
+/* ===================================================
+    *input.css
+    Input and Command Button Styles
+    Defines appearance and behavior of input fields and command buttons.
+=================================================== */
+
+/* Input field - Terminal text entry */
+.input-field { 
+    background: transparent;
+    color: inherit;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    font-family: var(--font-mono);
+    caret-color: var(--primary-color) !important;
+    cursor: var(--custom-cursor);
+}
+
+/* Command button - Clickable commands in terminal */
+.command-btn { 
+    color: var(--primary-color);
+    cursor: var(--custom-pointer);
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+  }

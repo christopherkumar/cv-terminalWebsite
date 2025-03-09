@@ -1,0 +1,36 @@
+/* ===================================================
+  *animation.css
+  Animations and Effects - Expand/Collapse & Transitions
+  Handles smooth roll-down effects for commands and details sections.
+=================================================== */
+
+/* Command output animation: Initially hidden */
+.command-output { 
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Command output animation: Visible state */
+.command-output.show { 
+    transform: scaleY(1);
+    opacity: 1;
+    max-height: 500px; /* Ensures it fully expands */
+}
+
+/* Details section: Initially hidden */
+.details { 
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Details section: Expanded state */
+.details.expanded { 
+    opacity: 1;
+    max-height: 500px; /* Adjust as needed */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
