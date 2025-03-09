@@ -144,14 +144,6 @@
 		outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
 	}
 
-	function processCommandResponse(command) {
-		let responseElement = document.createElement("div");
-		responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
-		responseElement.classList.add("command-output");
-		responseElement.setAttribute("role", "status");
-		outputDiv.appendChild(responseElement);
-	}
-
 	function displayUnknownCommand(command) {
 		let errorElement = document.createElement("div");
 		errorElement.innerHTML = `<p class="prompt">Command "${command}" not found.</p>`;
