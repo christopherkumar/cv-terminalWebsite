@@ -14,6 +14,10 @@
     font-family: var(--font-mono);
     caret-color: var(--primary-color) !important;
     cursor: var(--custom-cursor);
+    padding: 0;
+    margin-left: 5px;
+    width: 100%;
+    display: inline-block;
 }
 
 /* Command button - Clickable commands in terminal */

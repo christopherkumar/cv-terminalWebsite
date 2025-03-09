@@ -26,7 +26,10 @@
       
       <!-- Input Area for User Commands -->
       <div class="input-line">
-        <span class="prompt">➜ ~ </span>
+        <div class="prompt">
+            <span>➜ ~</span>
+            <input type="text" id="terminal-input" class="input-field">
+        </div>
         <span id="input-wrapper">
           <span id="input-text">&nbsp;</span>
         </span>
@@ -39,6 +42,6 @@
        JavaScript Files
        ================================================== -->
   <script src="commands.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 </html>
