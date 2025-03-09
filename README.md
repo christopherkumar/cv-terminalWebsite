@@ -2,15 +2,15 @@
 
 A web-based interactive resume designed to look and function like a command-line terminal. This project provides a unique and engaging way to showcase **Christopher Kumar’s** skills, experience, projects, and contact information.
 
-## 🔗 Live Version
+## Live Version
 [Visit the site](https://christopherkumar.netlify.app/)
 
-## ✨ Features
+## Features
 - **Terminal-Style Interface**: Mimics a real command-line environment.
 - **Dark/Light Mode Toggle**: Switch between themes with a smooth transition.
 - **Expandable Sections**: Commands reveal details dynamically.
 
-## 📜 Available Commands
+## Available Commands
 Type the following commands into the terminal for more information:
 - `skills` – Lists technical skills.
 - `experience` – Shows work history.
