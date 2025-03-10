@@ -2,7 +2,7 @@
 /* Styles input fields and command buttons in the terminal */
 
 /* Input field - Terminal text entry */
-.input-field { 
+.input-field {
     background: transparent;
     color: inherit;
     border: none;
@@ -15,6 +15,11 @@
     margin-left: 5px;
     width: 100%;
     display: inline-block;
+}
+
+/* Ensure the input field is always focusable */
+.input-field:focus {
+    outline: none;
 }
 
 /* Command button - Clickable commands in terminal */

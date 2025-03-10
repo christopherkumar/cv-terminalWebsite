@@ -32,7 +32,6 @@ export function executeCommandFromClick(command) {
 
 // Executes a command and performs the appropriate action.
 function executeCommand(command) {
-    if (command === "clear") return resetTerminalOutput();
     if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
     if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
     
@@ -41,14 +40,53 @@ function executeCommand(command) {
 
 // Displays the output of a valid command.
 function displayCommandResponse(command) {
-    let responseElement = document.createElement("div");
-    responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
-    responseElement.classList.add("command-output", "slide-down");
-    responseElement.setAttribute("role", "status");
-    outputDiv.appendChild(responseElement);
-    
-    setTimeout(() => responseElement.classList.add("show"), 10);
-    outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+    const commandOutputs = outputDiv.querySelectorAll(".command-output");
+    if (commandOutputs.length > 0) {
+        const lastCommand = commandOutputs[commandOutputs.length - 1];
+
+        lastCommand.style.transition = "max-height 0.6s ease-in, opacity 0.6s ease-in";
+        lastCommand.style.maxHeight = "0px";
+        lastCommand.style.opacity = "0";
+
+        setTimeout(() => {
+            lastCommand.remove();
+
+            let responseElement = document.createElement("div");
+            responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
+            responseElement.classList.add("command-output");
+            responseElement.setAttribute("role", "status");
+
+            responseElement.style.maxHeight = "0px";
+            responseElement.style.opacity = "0";
+
+            outputDiv.appendChild(responseElement);
+
+            setTimeout(() => {
+                responseElement.style.transition = "max-height 0.8s ease-out, opacity 0.8s ease-out";
+                responseElement.style.maxHeight = "500px";
+                responseElement.style.opacity = "1";
+            }, 200);
+            outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+        }, 600);
+    } else {
+        let responseElement = document.createElement("div");
+        responseElement.innerHTML = window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`;
+        responseElement.classList.add("command-output");
+        responseElement.setAttribute("role", "status");
+
+        responseElement.style.maxHeight = "0px";
+        responseElement.style.opacity = "0";
+
+        outputDiv.appendChild(responseElement);
+
+        setTimeout(() => {
+            responseElement.style.transition = "max-height 0.8s ease-out, opacity 0.8s ease-out";
+            responseElement.style.maxHeight = "500px";
+            responseElement.style.opacity = "1";
+        }, 200);
+
+        outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+    }
 }
 
 // Handles unknown commands by displaying an error message.

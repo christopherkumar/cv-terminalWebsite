@@ -140,6 +140,14 @@ function getContactContent() {
     `;
 }
 
+// Returns formatted content for the "clear" command.
+function getClearMessage() {
+    return `
+        <p class="prompt">Terminal cleared.</p>
+        <p>Enter another command.</p>
+    `;
+}
+
 // Exposes the command outputs globally
 window.commands = {
     "skills": getSkillsContent(),
@@ -147,4 +155,5 @@ window.commands = {
     "projects": getProjectsContent(),
     "research": getResearchContent(),
     "contact": getContactContent(),
+    "clear": getClearMessage(),
 };

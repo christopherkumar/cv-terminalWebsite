@@ -1,20 +1,27 @@
 /* animation.css */
 /* Handles animations and transitions for command output and expandable sections */
 
-
-/* Command output animation: Initially hidden */
-.command-output { 
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+.intro-command {
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
-/* Command output animation: Visible state */
-.command-output.show { 
-    transform: scaleY(1);
+.intro-response {
+    color: var(--primary-color);
+}
+
+/* Command output animation: Initially hidden */
+.command-output {
+    max-height: 500px;
     opacity: 1;
-    max-height: 500px; /* Ensures it fully expands */
+    transition: max-height 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+/* Roll-up effect when removing commands */
+.command-output.roll-up {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.6s ease-in, opacity 0.6s ease-in;
 }
 
 /* Details section: Initially hidden */
@@ -28,6 +35,6 @@
 /* Details section: Expanded state */
 .details.expanded { 
     opacity: 1;
-    max-height: 500px; /* Adjust as needed */
+    max-height: 500px;
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
