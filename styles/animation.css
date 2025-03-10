@@ -38,3 +38,9 @@
     max-height: 500px;
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
+
+/* Error message styling */
+.error {
+    color: var(--error-color, red); /* Uses a theme variable for consistency */
+    font-weight: bold;
+}

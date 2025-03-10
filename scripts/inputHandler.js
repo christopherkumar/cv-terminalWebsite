@@ -9,6 +9,12 @@ let tabCycleIndex = 0;
 
 // Handles keyboard interactions (Enter, Arrow keys, Tab).
 export function handleKeydownEvent(event) {
+    // Prevent input beyond 50 characters
+    if (inputField.value.length >= 50 && event.key !== "Backspace" && event.key !== "Delete" && event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+        event.preventDefault();
+        return;
+    }
+
     switch (event.key) {
         case "Enter":
             const command = inputField.value.trim();
