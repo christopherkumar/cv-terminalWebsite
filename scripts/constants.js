@@ -13,6 +13,7 @@ export const availableCommands = {
     "projects": "Display projects.",
     "research": "Display research.",
     "contact": "Display contact information.",
+    "help": "Display help information",
     "clear": "Clear the terminal.",
     "light": "Switch to light mode.",
     "dark": "Switch to dark mode."
