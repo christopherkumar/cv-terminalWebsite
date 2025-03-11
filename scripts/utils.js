@@ -5,9 +5,9 @@ import { outputDiv, introText } from "./constants.js";
 
 // Ensures the input field remains focused.
 export function handleInputFocus(event) {
-    if (!isMobileDevice()) {
+    setTimeout(() => {
         document.getElementById("terminal-input").focus();
-    }
+    }, 0);
     if (event) event.preventDefault();
 }
 
