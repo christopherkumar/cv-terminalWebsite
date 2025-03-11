@@ -29,8 +29,8 @@ export let tabCycleIndex = 0;
 
 // Defines the intro text displayed in the terminal.
 export const introText = `
-    <p class="intro-command">➜ ~ whoami</p>
-    <p class="intro-response">Christopher Kumar</p>
+    <p class="header-blue">➜ ~ whoami</p>
+    <p class="text-blue">Christopher Kumar</p>
     <p>📍 Australia</p>
     <p>Engineer. Developer. Problem Solver.</p>
     <p>With a foundation in Computer Systems Engineering and a drive for innovation, I thrive in the intersection of AI, software development, and real-world solutions.</p>

@@ -143,20 +143,36 @@ function getContactContent() {
 // Returns formatted content for the "help" command.
 function getHelpContent() {
     return `
-        <p><b>Help - Terminal Commands</b></p>
-        <p>Welcome to the interactive terminal resume. Below are some useful tips:</p>
+        <p class="header-blue">Help - Terminal Commands</p>
+        <p>Welcome to my interactive terminal website. Below are some useful tips:</p>
         <ul>
-            <li><b>Navigation:</b> Click on any command under "Available Commands" instead of typing.</li>
-            <li><b>Expandable Sections:</b> Click the <code>[+]</code> next to items to expand details.</li>
-            <li><b>Clickable Links:</b> Some results contain links (GitHub, Drive, LinkedIn). Click to open them.</li>
-            <li><b>Keyboard Shortcuts:</b> 
+            <li><b class="text-blue">Navigation:</b> 
                 <ul>
-                    <li><code>Ctrl + L</code>: Clear the terminal</li>
-                    <li><code>Arrow Up/Down</code>: Cycle through command history</li>
-                    <li><code>Tab</code>: Auto-complete command</li>
+                    <li>Click on any command under "Available Commands" instead of typing.</li>
                 </ul>
             </li>
-            <li><b>Available Commands:</b> Click or type a command to execute.</li>
+            <li><b class="text-blue">Expandable Sections:</b> 
+                <ul>
+                    <li>Click the <code class="text-blue">[+]</code> next to items to expand details.</li>
+                </ul>
+            </li>
+            <li><b class="text-blue">Clickable Links:</b> 
+                <ul>
+                    <li>Some results contain links (GitHub, Drive, LinkedIn). Click to open them.</li>
+                </ul>
+            </li>
+            <li><b class="text-blue">Keyboard Shortcuts:</b> 
+                <ul>
+                    <li><b>Ctrl + L: Clear the terminal</b></li>
+                    <li><b>Arrow Up/Down: Cycle through command history</b></li>
+                    <li><b>Tab: Auto-complete/cycle through commands</b></li>
+                </ul>
+            </li>
+            <li><b class="text-blue">Available Commands:</b> 
+                <ul>
+                    <li>Click or type a command to execute.</li>
+                </ul>
+            </li>
         </ul>
     `;
 }

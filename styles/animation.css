@@ -1,12 +1,12 @@
 /* animation.css */
 /* Handles animations and transitions for command output and expandable sections */
 
-.intro-command {
+.header-blue {
     color: var(--primary-color);
     font-weight: bold;
 }
 
-.intro-response {
+.text-blue {
     color: var(--primary-color);
 }
 
