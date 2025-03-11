@@ -140,6 +140,27 @@ function getContactContent() {
     `;
 }
 
+// Returns formatted content for the "help" command.
+function getHelpContent() {
+    return `
+        <p><b>Help - Terminal Commands</b></p>
+        <p>Welcome to the interactive terminal resume. Below are some useful tips:</p>
+        <ul>
+            <li><b>Navigation:</b> Click on any command under "Available Commands" instead of typing.</li>
+            <li><b>Expandable Sections:</b> Click the <code>[+]</code> next to items to expand details.</li>
+            <li><b>Clickable Links:</b> Some results contain links (GitHub, Drive, LinkedIn). Click to open them.</li>
+            <li><b>Keyboard Shortcuts:</b> 
+                <ul>
+                    <li><code>Ctrl + L</code>: Clear the terminal</li>
+                    <li><code>Arrow Up/Down</code>: Cycle through command history</li>
+                    <li><code>Tab</code>: Auto-complete command</li>
+                </ul>
+            </li>
+            <li><b>Available Commands:</b> Click or type a command to execute.</li>
+        </ul>
+    `;
+}
+
 // Returns formatted content for the "clear" command.
 function getClearMessage() {
     return `
@@ -156,4 +177,5 @@ window.commands = {
     "research": getResearchContent(),
     "contact": getContactContent(),
     "clear": getClearMessage(),
+    "help": getHelpContent()
 };
