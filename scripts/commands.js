@@ -58,16 +58,21 @@ function getSkillsContent() {
 // Returns formatted content for the "experience" command.
 function getExperienceContent() {
     const experience = {
-        "AI/LLM Engineering Intern (2024)": [
+        "AuBot - Software Engineering Intern (2025)": [
+        "Stress-tested Python-based coding exercises to evaluate the robustness of the learning platform.",
+        "Diagnosed and reported bugs, content gaps, and usability issues to improve platform quality.",
+        "Contributed to overall user experience improvements through structured testing and feedback."
+        ],
+        "University of Southern Queensland - AI/LLM Engineering Intern (2024)": [
         "Researched and optimized the use of LLMs for grading Python scripts.",
         "Improved Retrieval-Augmented Generation workflows for better AI-assisted learning.",
         "Developed and tested AI models to enhance automation in assessment evaluation."
         ],
-        "Data Annotator (2021-2022)": [
+        "USQ, Center for Agricultural Engineering - Data Annotator (2021-2022)": [
         "Enhanced the GUI and functionality of machine vision annotation tools.",
         "Collaborated in a research team to improve dataset quality for AI models."
         ],
-        "Barista / Cafe Worker (2018-2022)": [
+        "Bounce Hub Cafe - Barista / Cafe Worker (2018-2022)": [
         "Managed daily operations including POS transactions and stock management.",
         "Developed strong interpersonal skills and ability to perform under pressure."
         ]
