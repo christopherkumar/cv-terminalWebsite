@@ -84,26 +84,20 @@ function getExperienceContent() {
 function getProjectsContent() {
     const projects = {
         "<a href='https://github.com/christopherkumar/prompt_engineering_test' class='project-link' target='_blank'>LLM Grading Study</a>": [
-            "Evaluated OpenAI and Ollama models for grading assessments.",
-            "Developed an automated scoring pipeline for evaluating Python scripts.",
-            "Conducted performance benchmarking on different LLM frameworks."
+            "Evaluated OpenAI and Ollama models for grading Python scripts and short-answer assessments.",
+            "Built an automated scoring pipeline and benchmarked LLM performance across frameworks."
         ],
         "<a href='https://github.com/christopherkumar/RAG-evaluation' class='project-link' target='_blank'>Retrieval-Augmented Generation (RAG)</a>": [
             "Implemented and tested RAG workflows to enhance AI-assisted retrieval.",
             "Optimized document embedding techniques to improve response accuracy."
         ],
         "<a href='https://github.com/christopherkumar/cv-terminalWebsite' class='project-link' target='_blank'>Interactive Terminal Resume</a>": [
-            "A web-based interactive resume designed to mimic a command-line terminal.",
-            "Features include a dark/light mode toggle, expandable sections, and smooth animations.",
-            "Provides an engaging way to showcase skills, experience, projects, and contact info.",
-            "Supports interactive commands such as 'skills', 'experience', 'projects', and more."
+            "Designed a web-based interactive resume mimicking a command-line terminal with support for commands like 'skills', 'experience', and 'projects'.",
+            "Includes features such as dark/light mode toggle, expandable sections, and smooth animations for an engaging user experience."
         ],
         "<a href='https://github.com/christopherkumar/simple-ollama-chatbot' class='project-link' target='_blank'>Chatbot with Contextual Memory and Vector Database</a>": [
-            "AI-powered chatbot that uses a vector database (ChromaDB) for contextual memory.",
-            "Implements conversation summarization after every 10 interactions for efficiency.",
-            "Stores conversations as embeddings using the mxbai-embed-large model.",
-            "Generates time-stamped log files for both full and summarized conversation history.",
-            "Built with Python, Ollama, and LangChain."
+            "Developed an AI chatbot using Python, Ollama, and LangChain with ChromaDB for contextual memory and embedding storage via mxbai-embed-large.",
+            "Implemented interaction summarization and time-stamped logging to maintain efficient, persistent conversation history."
         ]
     };
     return generateContent(projects);
