@@ -15,7 +15,6 @@ export const availableCommands = {
     "contact": "Display contact information.",
     "help": "Display help information",
     "clear": "Clear the terminal.",
-    "theme": "Toggle light/dark mode.",
     "light": "Switch to light mode.",
     "dark": "Switch to dark mode."
 };
@@ -38,9 +37,9 @@ function getCurrentThemeButtonText() {
 export function getIntroText() {
     const themeButtonText = getCurrentThemeButtonText();
     const commandButtons = commandKeys
-        .filter(cmd => !['theme', 'light', 'dark'].includes(cmd)) // Remove all theme-related commands from buttons
+        .filter(cmd => !['light', 'dark'].includes(cmd)) // Remove light/dark from buttons since we have dynamic theme button
         .map(cmd => `<span class="command-btn" onclick="executeCommandFromClick('${cmd}')">${cmd}</span>`)
-        .concat(`<span class="command-btn" onclick="executeCommandFromClick('theme')">${themeButtonText}</span>`)
+        .concat(`<span class="command-btn" onclick="executeCommandFromClick('${themeButtonText}')">${themeButtonText}</span>`)
         .join(" | ");
 
     return `
@@ -65,9 +64,9 @@ export function getIntroText() {
 export function updateCommandButtons() {
     const themeButtonText = getCurrentThemeButtonText();
     const commandButtons = commandKeys
-        .filter(cmd => !['theme', 'light', 'dark'].includes(cmd))
+        .filter(cmd => !['light', 'dark'].includes(cmd))
         .map(cmd => `<span class="command-btn" onclick="executeCommandFromClick('${cmd}')">${cmd}</span>`)
-        .concat(`<span class="command-btn" onclick="executeCommandFromClick('theme')">${themeButtonText}</span>`)
+        .concat(`<span class="command-btn" onclick="executeCommandFromClick('${themeButtonText}')">${themeButtonText}</span>`)
         .join(" | ");
     
     const buttonElement = document.getElementById('command-buttons');

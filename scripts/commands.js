@@ -196,7 +196,6 @@ window.commands = {
     "contact": getContactContent(),
     "clear": getClearMessage(),
     "help": getHelpContent(),
-    "theme": `<p class="prompt">Theme toggled successfully.</p>`,
     "light": `<p class="prompt">Theme toggled successfully.</p>`,
     "dark": `<p class="prompt">Theme toggled successfully.</p>`
 };
