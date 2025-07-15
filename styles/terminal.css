@@ -57,7 +57,7 @@ a:hover, .project-link:hover, .research-link:hover, .links-section a:hover, .tog
     cursor: var(--custom-pointer) !important;
 }
 
-/* Terminal font - Enforces monospace font */
+/* Terminal font - Enforces  font */
 .terminal, .input-field, .prompt { 
-    font-family: "Fira Code", monospace !important;
+    font-family: "DM Sans", sans-serif !important;
 }
