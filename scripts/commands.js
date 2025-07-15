@@ -167,6 +167,11 @@ function getHelpContent() {
                     <li><b>Tab: Auto-complete/cycle through commands</b></li>
                 </ul>
             </li>
+            <li><b class="text-blue">Theme Toggle:</b> 
+                <ul>
+                    <li>The theme button dynamically shows the opposite mode (light/dark) and switches without clearing your commands.</li>
+                </ul>
+            </li>
             <li><b class="text-blue">Available Commands:</b> 
                 <ul>
                     <li>Click or type a command to execute.</li>
@@ -192,5 +197,8 @@ window.commands = {
     "research": getResearchContent(),
     "contact": getContactContent(),
     "clear": getClearMessage(),
-    "help": getHelpContent()
+    "help": getHelpContent(),
+    "theme": `<p class="prompt">Theme toggled successfully.</p>`,
+    "light": `<p class="prompt">Theme toggled successfully.</p>`,
+    "dark": `<p class="prompt">Theme toggled successfully.</p>`
 };

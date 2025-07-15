@@ -1,7 +1,7 @@
 // utils.js
 // Utility functions for general operations
 
-import { outputDiv, introText } from "./constants.js";
+import { outputDiv, getIntroText } from "./constants.js";
 
 // Ensures the input field remains focused.
 export function handleInputFocus(event) {
@@ -16,20 +16,25 @@ export function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 }
 
-// Toggles between light and dark modes.
+// Toggles between light and dark modes without clearing terminal content.
+export function toggleModeWithoutClearing() {
+    document.body.classList.toggle("light-mode");
+}
+
+// Toggles between light and dark modes (legacy function - clears terminal).
 export function toggleMode(modeClass, alreadyMessage, switchedMessage, remove = false) {
     const shouldHaveClass = !remove;
     const isClassPresent = document.body.classList.contains(modeClass);
 
     if (isClassPresent === shouldHaveClass) {
-        outputDiv.innerHTML = introText + `<p class="prompt">${alreadyMessage}</p>`;
+        outputDiv.innerHTML = getIntroText() + `<p class="prompt">${alreadyMessage}</p>`;
     } else {
         if (shouldHaveClass) {
             document.body.classList.add(modeClass);
         } else {
             document.body.classList.remove(modeClass);
         }
-        outputDiv.innerHTML = introText + `<p class="prompt">${switchedMessage}</p>`;
+        outputDiv.innerHTML = getIntroText() + `<p class="prompt">${switchedMessage}</p>`;
     }
 }
 

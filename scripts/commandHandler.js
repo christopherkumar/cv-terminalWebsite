@@ -1,14 +1,23 @@
 // commandHandler.js
 // Processes and executes commands
 
-import { outputDiv, commandKeys, introText } from "./constants.js";
-import { toggleMode } from "./utils.js";
+import { outputDiv, commandKeys, getIntroText, updateCommandButtons, commandHistory } from "./constants.js";
+import { toggleModeWithoutClearing } from "./utils.js";
 import "./commands.js";
+
+let historyIndex = commandHistory.length;
 
 // Handles command execution and output rendering.
 export function handleCommand(command) {
     if (!command.trim()) return;
     command = command.toLowerCase();
+    
+    // Handle theme command specially
+    if (command === "theme" || command === "light" || command === "dark") {
+        handleThemeCommand(command);
+        return;
+    }
+    
     resetTerminalOutput();
 
     let commandElement = document.createElement("p");
@@ -23,6 +32,42 @@ export function handleCommand(command) {
     }
 }
 
+// Handles theme switching and clears terminal
+function handleThemeCommand(command) {
+    // Clear terminal first
+    resetTerminalOutput();
+    
+    // Add the command prompt to show what was executed
+    let commandElement = document.createElement("p");
+    commandElement.classList.add("prompt");
+    commandElement.innerHTML = `➜ ~ ${command}`;
+    outputDiv.appendChild(commandElement);
+    
+    // Toggle the theme
+    toggleModeWithoutClearing();
+    
+    // Show a brief message about the change
+    const newMode = document.body.classList.contains("light-mode") ? "Light" : "Dark";
+    let responseElement = document.createElement("div");
+    responseElement.innerHTML = `<p class="prompt">Switched to ${newMode} Mode.</p>`;
+    responseElement.classList.add("command-output");
+    responseElement.style.maxHeight = "0px";
+    responseElement.style.opacity = "0";
+    
+    outputDiv.appendChild(responseElement);
+    
+    setTimeout(() => {
+        responseElement.style.transition = "max-height 0.8s ease-out, opacity 0.8s ease-out";
+        responseElement.style.maxHeight = "500px";
+        responseElement.style.opacity = "1";
+    }, 200);
+    
+    // Update the theme button immediately
+    updateCommandButtons();
+    
+    outputDiv.scrollTo({ top: outputDiv.scrollHeight, behavior: "smooth" });
+}
+
 // Allows commands to be executed when clicked.
 export function executeCommandFromClick(command) {
     handleCommand(command);
@@ -32,9 +77,6 @@ export function executeCommandFromClick(command) {
 
 // Executes a command and performs the appropriate action.
 function executeCommand(command) {
-    if (command === "light") return toggleMode("light-mode", "Already in Light Mode.", "Switched to Light Mode.");
-    if (command === "dark") return toggleMode("light-mode", "Already in Dark Mode.", "Switched to Dark Mode.", true);
-    
     displayOutput(window.commands[command] || `<p class="prompt">No content available for ${command}.</p>`);
 }
 
@@ -78,5 +120,5 @@ function appendOutput(content, isError) {
 
 // Clears the terminal and resets it to the intro text.
 export function resetTerminalOutput() {
-    outputDiv.innerHTML = introText;
+    outputDiv.innerHTML = getIntroText();
 }

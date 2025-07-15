@@ -64,9 +64,11 @@ function resetInputField() {
 // Implements command auto-completion.
 function autoCompleteCommand() {
     const currentInput = inputField.value.trim();
-    if (!currentInput || commandKeys.includes(currentInput)) {
-        inputField.value = commandKeys[tabCycleIndex];
-        tabCycleIndex = (tabCycleIndex + 1) % commandKeys.length;
+    const mainCommands = commandKeys.filter(cmd => !['light', 'dark'].includes(cmd)); // Use theme instead of light/dark for cycling
+    
+    if (!currentInput || mainCommands.includes(currentInput)) {
+        inputField.value = mainCommands[tabCycleIndex];
+        tabCycleIndex = (tabCycleIndex + 1) % mainCommands.length;
     } else {
         const match = commandKeys.find(cmd => cmd.startsWith(currentInput));
         if (match) {

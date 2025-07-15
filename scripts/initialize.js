@@ -1,7 +1,7 @@
 // initialize.js
 // Handles initialization and event listeners
 
-import { inputField, outputDiv, introText } from "./constants.js";
+import { inputField, outputDiv, getIntroText } from "./constants.js";
 import { handleInputFocus } from "./utils.js";
 import { handleKeydownEvent } from "./inputHandler.js";
 import { resetTerminalOutput } from "./commandHandler.js";
@@ -43,5 +43,5 @@ function initializeInputField() {
 function startTypingSequence() {
     if (window.introLoaded) return;
     window.introLoaded = true;
-    outputDiv.innerHTML = introText;
+    outputDiv.innerHTML = getIntroText();
 }
