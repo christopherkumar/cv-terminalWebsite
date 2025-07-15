@@ -37,10 +37,13 @@ function handleThemeCommand(command) {
     // Clear terminal first
     resetTerminalOutput();
     
-    // Add the command prompt to show what was executed
+    // Determine what mode we're switching TO (before the toggle)
+    const targetMode = document.body.classList.contains("light-mode") ? "dark" : "light";
+    
+    // Add the command prompt to show the target mode
     let commandElement = document.createElement("p");
     commandElement.classList.add("prompt");
-    commandElement.innerHTML = `➜ ~ ${command}`;
+    commandElement.innerHTML = `➜ ~ ${targetMode}`;
     outputDiv.appendChild(commandElement);
     
     // Toggle the theme
