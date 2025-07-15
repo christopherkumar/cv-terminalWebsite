@@ -31,25 +31,25 @@ function generateListItem(key, value) {
 function getSkillsContent() {
     const skills = {
         "Programming Languages": [
-        "Python (Machine Learning, AI, Automation)",
-        "C++ / C & Arduino (Embedded Systems, High-Performance Computing)",
-        "MATLAB & Simulink (Engineering Applications)",
-        "HTML, JS & CSS (Web Development, App Development)"
+            "Python (Machine Learning, AI, Automation)",
+            "C++ / C & Arduino (Embedded Systems, High-Performance Computing)",
+            "MATLAB & Simulink (Engineering Applications)",
+            "HTML, JS & CSS (Web Development, App Development)"
         ],
         "Software & Tools": [
-        "AI & ML: TensorFlow, PyTorch, scikit-learn",
-        "Databases: SQLite, ChromaDB, FAISS, LanceDB",
-        "Engineering & Design: AutoCAD, MATLAB",
-        "General: Microsoft Office Suite, LibreOffice Suite, Git"
+            "AI & ML: TensorFlow, PyTorch, scikit-learn",
+            "Databases: SQLite, ChromaDB, FAISS, LanceDB",
+            "Engineering & Design: AutoCAD, MATLAB",
+            "General: Microsoft Office Suite, LibreOffice Suite, Git"
         ],
         "AI, Networking & Systems": [
-        "LLMs: OpenAI, Anthropic, Ollama, HuggingFace",
-        "Networking: Cisco configuration",
-        "Systems: Linux, Windows, WSL, Docker"
+            "LLMs: OpenAI, Anthropic, Ollama, HuggingFace",
+            "Networking: Cisco configuration",
+            "Systems: Linux, Windows, WSL, Docker"
         ],
         "Electronics & Hardware": [
-        "Electronics: Circuit design, PCB layout, soldering",
-        "Computer Hardware: Assembly, troubleshooting"
+            "Electronics: Circuit design, PCB layout, soldering",
+            "Computer Hardware: Assembly, troubleshooting"
         ]
     };
     return generateContent(skills);
@@ -59,22 +59,22 @@ function getSkillsContent() {
 function getExperienceContent() {
     const experience = {
         "AuBot - Software Engineering Intern (2025)": [
-        "Stress-tested Python-based coding exercises to evaluate the robustness of the learning platform.",
-        "Diagnosed and reported bugs, content gaps, and usability issues to improve platform quality.",
-        "Contributed to overall user experience improvements through structured testing and feedback."
+            "Stress-tested Python-based coding exercises to evaluate the robustness of the learning platform.",
+            "Diagnosed and reported bugs, content gaps, and usability issues to improve platform quality.",
+            "Contributed to overall user experience improvements through structured testing and feedback."
         ],
         "University of Southern Queensland - AI/LLM Engineering Intern (2024)": [
-        "Researched and optimized the use of LLMs for grading Python scripts.",
-        "Improved Retrieval-Augmented Generation workflows for better AI-assisted learning.",
-        "Developed and tested AI models to enhance automation in assessment evaluation."
+            "Researched and optimized the use of LLMs for grading Python scripts.",
+            "Improved Retrieval-Augmented Generation workflows for better AI-assisted learning.",
+            "Developed and tested AI models to enhance automation in assessment evaluation."
         ],
         "USQ, Center for Agricultural Engineering - Data Annotator (2021-2022)": [
-        "Enhanced the GUI and functionality of machine vision annotation tools.",
-        "Collaborated in a research team to improve dataset quality for AI models."
+            "Enhanced the GUI and functionality of machine vision annotation tools.",
+            "Collaborated in a research team to improve dataset quality for AI models."
         ],
         "Bounce Hub Cafe - Barista / Cafe Worker (2018-2022)": [
-        "Managed daily operations including POS transactions and stock management.",
-        "Developed strong interpersonal skills and ability to perform under pressure."
+            "Managed daily operations including POS transactions and stock management.",
+            "Developed strong interpersonal skills and ability to perform under pressure."
         ]
     };
     return generateContent(experience);
@@ -129,12 +129,10 @@ function getResearchContent() {
 function getContactContent() {
     return `
         <ul class="contact-section">
-        <li><a href="mailto:christopherkumar812@gmail.com" target='_blank'>Email</a></li>
-        <li><a href="https://www.linkedin.com/in/christopher-kumar/" target='_blank'>LinkedIn</a></li>
-        <li><a href="https://drive.google.com/file/d/1dS-SfApwipPBnU6ICy0jSEu1XnfnVF2f/view?usp=sharing" target='_blank'>Resume</a></li>
-        <li><a href="https://github.com/christopherkumar" target='_blank'>GitHub</a></li>
-        <li><a href="https://leetcode.com/u/cvkumar812" target='_blank'>LeetCode</a></li>
-        
+            <li><a href="mailto:christopherkumar812@gmail.com" target='_blank'>Email</a></li>
+            <li><a href="https://www.linkedin.com/in/christopher-kumar/" target='_blank'>LinkedIn</a></li>
+            <li><a href="https://drive.google.com/file/d/1dS-SfApwipPBnU6ICy0jSEu1XnfnVF2f/view?usp=sharing" target='_blank'>Resume</a></li>
+            <li><a href="https://github.com/christopherkumar" target='_blank'>GitHub</a></li>        
         </ul>
     `;
 }
