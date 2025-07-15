@@ -56,8 +56,3 @@ a:hover, .project-link:hover, .research-link:hover, .links-section a:hover, .tog
     color: var(--primary-color) !important;
     cursor: var(--custom-pointer) !important;
 }
-
-/* Terminal font - Enforces  font */
-.terminal, .input-field, .prompt { 
-    font-family: "DM Sans", sans-serif !important;
-}
